@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket = "final-infrastructure-tf-state-bucket"
     key = "main"
-    region = "var.aws_region"
+    region = "us-west-1"
     dynamodb_table = "final-infrastructure-dynamo-db-table"
   }
 }
