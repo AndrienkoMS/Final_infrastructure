@@ -24,5 +24,6 @@ pipeline {
                 echo "Terraform is going to do command --> ${terraform_command}"
                 sh ('terraform ${terraform_command} --auto-approve') 
            }
+        }
     }
 }
