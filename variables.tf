@@ -1,11 +1,11 @@
 variable "aws_region" {
        description = "The AWS region to create things in." 
-       default     = "us-east-1" 
+       default     = "us-west-1" 
 }
 
 variable "key_name" { 
     description = " SSH keys to connect to ec2 instance" 
-    default     =  "mySep22Key" 
+    default     =  "final-infrastructure-key" 
 }
 
 variable "instance_type" { 
@@ -23,8 +23,8 @@ variable "tag_name" {
     default     = "my-ec2-instance" 
 } 
 variable "ami_id" { 
-    description = "AMI for Ubuntu Ec2 instance" 
-    default     = "ami-0ee23bfc74a881de5" 
+    description = "AMI for Ubuntu Ec2 instance - Ubuntu server 22.04 LTS (HVM), 64 bit" 
+    default     = "ami-09b2a1e33ce552e68" 
 }
 variable "versioning" {
     type        = bool
@@ -39,7 +39,7 @@ variable "acl" {
 variable "bucket_prefix" {
     type        = string
     description = "(required since we are not using 'bucket') Creates a unique bucket name beginning with the specified prefix"
-    default     = "my-s3bucket-"
+    default     = "final-infrastructure-s3bucket-"
 }
 variable "tags" {
     type        = map
@@ -47,5 +47,6 @@ variable "tags" {
     default     = {
         environment = "DEV"
         terraform   = "true"
+        project     = "final"
     }
 }
