@@ -10,6 +10,20 @@ resource "aws_vpc" "main" {
   }
 }
 
+#Create RDS MySQL database to store wordpress data
+resource "aws_db_instance" "default" {
+  engine = "mysql"
+  engine_version = "8.0.28"
+  instance_class = "db.t2.micro"
+  name = "l1dbtest"
+  username = "ams"
+  password = "test"
+  allocated_storage = 5
+  parameter_group_name = "default.mysql8.8.28"
+  skip_final_snapshot = true
+}
+
+
 #Create security group with firewall rules
 /*
 resource "aws_security_group" "jenkins-sg-2022" {
