@@ -15,12 +15,12 @@ variable "instance_type" {
 
 variable "security_group" { 
     description = "Name of security group" 
-    default     = "jenkins-sgroup-dec-2021" 
+    default     = "l1-final-infrastructure-jenkins-sgroup" 
 }
 
 variable "tag_name" { 
     description = "Tag Name of for Ec2 instance" 
-    default     = "my-ec2-instance" 
+    default     = "l1-final-infrastructure-ec2-instance" 
 } 
 variable "ami_id" { 
     description = "AMI for Ubuntu Ec2 instance - Ubuntu server 22.04 LTS (HVM), 64 bit" 
@@ -39,13 +39,13 @@ variable "acl" {
 variable "bucket_prefix" {
     type        = string
     description = "(required since we are not using 'bucket') Creates a unique bucket name beginning with the specified prefix"
-    default     = "final-infrastructure-s3bucket-"
+    default     = "l1-final-infrastructure-s3bucket-"
 }
 variable "tags" {
     type        = map
     description = "(Optional) A mapping of tags to assign to the bucket."
     default     = {
-        environment = "DEV"
+        environment = "dev"
         terraform   = "true"
         project     = "final"
     }
