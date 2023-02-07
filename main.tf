@@ -19,7 +19,7 @@ resource "aws_db_instance" "default" {
   username = "ams"
   password = "testpassword"
   allocated_storage = 5
-  parameter_group_name = "default.mysql8.8.28"
+  parameter_group_name = "default.mysql8.0.28"
   skip_final_snapshot = true
 }
 
