@@ -50,3 +50,28 @@ variable "tags" {
         project     = "final"
     }
 }
+#---- ----- mysql database credentials ----- ----#
+# data is stored in jenkins credentials
+environment {
+   DB_NAME = credentials('DB_NAME')
+   DB_USER = credentials('DB_USER')
+   DB_PASSWORD = credentials('DB_PASSWORD')
+}
+
+variable "DB" {
+    NAME        = $DB_NAME
+    USER = $DB_USER
+    PASSWORD     = $DB_PASSWORD
+}
+
+/*
+name = "l1dbtest"
+  username = "ams"
+  password = "testpassword"
+
+DB_NAME=WordpressTest
+DB_USER=admin
+DB_PASSWORD=01340134
+DB_HOST=database-1.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306
+*/
+#---- ----- end mysql database credentials ----- ----#
