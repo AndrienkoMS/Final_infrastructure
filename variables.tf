@@ -53,8 +53,8 @@ variable "tags" {
 #---- ----- mysql database credentials ----- ----#
 # data is stored in jenkins credentials
 environment {
-   DB_NAME = credentials('DB_NAME')
-   DB_USER = credentials('DB_USER')
+   DB_NAME = credentials('DB_NAME'),
+   DB_USER = credentials('DB_USER'),
    DB_PASSWORD = credentials('DB_PASSWORD')
 }
 
