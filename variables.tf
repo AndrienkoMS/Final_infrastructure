@@ -52,11 +52,16 @@ variable "tags" {
 }
 #---- ----- mysql database credentials ----- ----#
 # data is stored in jenkins credentials => exported to ubuntu environment => imported to tf file
-/*
-variable "DB" {
-    NAME        = $DB_NAME
-    USER        = $DB_USER
-    PASSWORD    = $DB_PASSWORD
+variable "dbname" {
+  type = string
+}
+
+variable "dbuser" {
+  type = string
+}
+
+variable "dbpassword" {
+  type = string
 }
 
 data "external" "env" {
@@ -64,9 +69,6 @@ data "external" "env" {
 }
 */
 /*
-name = "l1dbtest"
-  username = "ams"
-  password = "testpassword"
 
 DB_NAME=WordpressTest
 DB_USER=admin

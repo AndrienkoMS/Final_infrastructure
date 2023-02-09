@@ -2,18 +2,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-variable "dbname" {
-  type = string
-}
-
-variable "dbuser" {
-  type = string
-}
-
-variable "dbpassword" {
-  type = string
-}
-
 resource "aws_vpc" "main" {
   cidr_block = "172.16.0.0/16"
   instance_tenancy = "default"
@@ -31,11 +19,6 @@ resource "aws_db_instance" "default" {
   name     = var.dbname
   username = var.dbuser
   password = var.dbpassword
-  /*
-  name     = var.DB.NAME
-  username = var.DB.USER
-  password = var.DB.PASSWORD
-  */
   allocated_storage = 5
   #parameter_group_name = "default.mysql5.7"
   skip_final_snapshot = true
