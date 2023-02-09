@@ -28,13 +28,13 @@ pipeline {
         
         stage ("Plan") {
             steps {
-                sh ('TF_VAR_DB_NAME=$DB_NAME TF_VAR_DB_USER=$DB_USER TF_VAR_DB_PASSWORD=$DB_PASSWORD terraform plan') 
+                sh ('TF_VAR_db-name=$DB_NAME TF_VAR_db-user=$DB_USER TF_VAR_db-password=$DB_PASSWORD terraform plan') 
             }
         }
         stage ("Action") {
             steps {
                 echo "Terraform is going to do command --> ${terraform_command}"
-                sh ('TF_VAR_DB_NAME=$DB_NAME TF_VAR_DB_USER=$DB_USER TF_VAR_DB_PASSWORD=$DB_PASSWORD terraform ${terraform_command} --auto-approve') 
+                sh ('TF_VAR_db-name=$DB_NAME TF_VAR_db-user=$DB_USER TF_VAR_db-password=$DB_PASSWORD terraform ${terraform_command} --auto-approve') 
            }
         }
     }
