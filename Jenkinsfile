@@ -23,18 +23,19 @@ pipeline {
         stage ("Terraform init") {
             steps {
                 sh ("terraform init") 
+                sh 'echo $DB_NAME'
             }
         }
         
         stage ("Plan") {
             steps {
-                sh ('TF_VAR_db_name=${DB_NAME} TF_VAR_db_user=${DB_USER} TF_VAR_db_password=${DB_PASSWORD} terraform plan') 
+                sh ('TF_VAR_db-name=${DB_NAME} TF_VAR_db-user=${DB_USER} TF_VAR_db-password=${DB_PASSWORD} terraform plan') 
             }
         }
         stage ("Action") {
             steps {
                 echo "Terraform is going to do command --> ${terraform_command}"
-                sh ('TF_VAR_db_name=${DB_NAME} TF_VAR_db_user=${DB_USER} TF_VAR_db_password=${DB_PASSWORD} terraform ${terraform_command} --auto-approve') 
+                sh ('TF_VAR_db-name=${DB_NAME} TF_VAR_db-user=${DB_USER} TF_VAR_db-password=${DB_PASSWORD} terraform ${terraform_command} --auto-approve') 
            }
         }
     }

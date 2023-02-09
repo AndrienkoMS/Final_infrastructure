@@ -2,15 +2,15 @@ provider "aws" {
   region = var.aws_region
 }
 
-variable "db_name" {
+variable "db-name" {
   type = string
 }
 
-variable "db_user" {
+variable "db-user" {
   type = string
 }
 
-variable "db_password" {
+variable "db-password" {
   type = string
 }
 
@@ -28,9 +28,9 @@ resource "aws_db_instance" "default" {
   engine = "mysql"
   engine_version = "8.0.28"
   instance_class = "db.t2.micro"
-  name     = var.db_name
-  username = var.db_user
-  password = var.db_password
+  name     = var.db-name
+  username = var.db-user
+  password = var.db-password
   /*
   name     = var.DB.NAME
   username = var.DB.USER
