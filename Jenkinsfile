@@ -5,13 +5,11 @@ pipeline {
         DB_USER = credentials('DB_USER')
         DB_PASSWORD = credentials('DB_PASSWORD')
     }
-    /*
     sh '''
-        export DB_NAME=$DB_NAME
-        export DB_USER = $DB_USER
-        export DB_PASSWORD = $DB_PASSWORD
+        export TF_VAR_db-name=$DB_NAME
+        export TF_VAR_db-user = $DB_USER
+        export F_VAR_db-password = $DB_PASSWORD
     '''
-    */
 
     stages {
         stage('Checkout') {
