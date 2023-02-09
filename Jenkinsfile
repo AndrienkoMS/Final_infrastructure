@@ -28,7 +28,7 @@ pipeline {
         
         stage ("Plan") {
             steps {
-                sh ('terraform plan') 
+                sh ('TF_VAR_DB_NAME=$DB_NAME TF_VAR_DB_USER=$DB_USER TF_VAR_DB_PASSWORD=$DB_PASSWORD terraform plan') 
             }
         }
         stage ("Action") {
