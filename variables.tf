@@ -64,10 +64,11 @@ variable "dbpassword" {
   type = string
 }
 
+/*
 data "external" "env" {
   program = ["${path.module}/env.sh"]
 }
-
+*/
 /*
 
 DB_NAME=WordpressTest
