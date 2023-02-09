@@ -18,9 +18,9 @@ pipeline {
         stage('declaring credentials') {
             steps {
                     sh '''
-                        export TF_VAR_db-name=$DB_NAME
-                        export TF_VAR_db-user = $DB_USER
-                        export F_VAR_db-password = $DB_PASSWORD
+                        export TF_VAR_dbname=$DB_NAME
+                        export TF_VAR_dbuser = $DB_USER
+                        export F_VAR_dbpassword = $DB_PASSWORD
                     '''
             }
         }
