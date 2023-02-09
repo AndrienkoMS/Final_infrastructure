@@ -24,7 +24,7 @@ resource "aws_vpc" "main" {
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
-  identifier = ""
+  identifier = "L1_MySQL_DB"
   engine = "mysql"
   engine_version = "8.0.28"
   instance_class = "db.t2.micro"
