@@ -28,13 +28,12 @@ pipeline {
         stage ("Terraform init") {
             steps {
                 sh ("terraform init") 
-                sh 'printenv'
             }
         }
         
         stage ("Plan") {
             steps {
-                sh ('terraform plan -var="dbname=$DB_NAME" -var="dbuser=$DB_USER" -var="dbpassword=$DB_PASSWORD"') 
+                sh ('terraform plan -var="dbname=${DB_NAME}" -var="dbuser=${DB_USER}" -var="dbpassword=${DB_PASSWORD}"') 
             }
         }
         /*
