@@ -28,9 +28,9 @@ resource "aws_db_instance" "default" {
   engine = "mysql"
   engine_version = "8.0.28"
   instance_class = "db.t2.micro"
-  name     = var.DB.NAME
-  username = var.DB.USER
-  password = var.DB.PASSWORD
+  name     = var.DB_NAME
+  username = var.DB_USER
+  password = var.DB_PASSWORD
   /*
   name     = var.DB.NAME
   username = var.DB.USER
