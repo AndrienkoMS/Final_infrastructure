@@ -19,8 +19,8 @@ pipeline {
             steps {
                     sh '''
                         export TF_VAR_dbname=$DB_NAME
-                        export TF_VAR_dbuser = $DB_USER
-                        export F_VAR_dbpassword = $DB_PASSWORD
+                        export TF_VAR_dbuser=$DB_USER
+                        export F_VAR_dbpassword=$DB_PASSWORD
                     '''
             }
         }
