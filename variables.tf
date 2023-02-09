@@ -51,19 +51,18 @@ variable "tags" {
     }
 }
 #---- ----- mysql database credentials ----- ----#
-# data is stored in jenkins credentials
-environment {
-   DB_NAME = credentials('DB_NAME'),
-   DB_USER = credentials('DB_USER'),
-   DB_PASSWORD = credentials('DB_PASSWORD')
-}
-
+# data is stored in jenkins credentials => exported to ubuntu environment => imported to tf file
+/*
 variable "DB" {
     NAME        = $DB_NAME
-    USER = $DB_USER
-    PASSWORD     = $DB_PASSWORD
+    USER        = $DB_USER
+    PASSWORD    = $DB_PASSWORD
 }
 
+data "external" "env" {
+  program = ["${path.module}/env.sh"]
+}
+*/
 /*
 name = "l1dbtest"
   username = "ams"
