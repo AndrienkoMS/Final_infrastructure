@@ -66,6 +66,13 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port   = 8080 #HTTP Alternate - open for jenkins to run script
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
  # outbound from wordpress
   egress {
     from_port   = 0
@@ -99,6 +106,7 @@ resource "local_file" "l1_infrastructure_key" {
   content  = tls_private_key.l1_rsa.private_key_pem
   filename = "tfkey"
 }
+
 
 resource "aws_instance" "myFirstInstance" {
   ami           = var.ami_id
