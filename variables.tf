@@ -65,7 +65,6 @@ variable "dbpassword" {
 }
 
 /*
-
 DB_NAME=WordpressTest
 DB_USER=admin
 DB_PASSWORD=01340134

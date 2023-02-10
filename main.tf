@@ -3,8 +3,6 @@ provider "aws" {
 }
 
 
-
-
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
   identifier = "l1-mysql-db"
@@ -17,6 +15,28 @@ resource "aws_db_instance" "default" {
   allocated_storage = 5
   #parameter_group_name = "default.mysql5.7"
   skip_final_snapshot = true
+}
+
+
+#IAM role to attach to ec2 to connect to DB
+resource "aws_iam_role_policy" "l1_infrastructure_ec2_policy" {
+  name = "l1_infrastructure_ec2_policy"
+  role = "$aws_iam_role.l1_infrastructure_ec2_role.id}"
+
+  policy = "${file("ec2-policy.json")}"
+}
+
+resource "aws_iam_role" "l1_infrastructure_ec2_role" {
+  name = "l1_infrastructure_ec2_role"
+
+  assume_role_policy = "${file("ec2-assume-policy.json")}"
+}
+
+
+#profile to connect IAM role to ec2
+resource "aws_iam_instance_profile" "l1_infrastructure_ec2_profile" {
+  name = "l1_infrastructure_ec2_profile"
+  role = "${aws_iam_role.l1_infrastructure_ec2_role.name}"
 }
 
 
@@ -64,6 +84,7 @@ resource "aws_instance" "myFirstInstance" {
   ami           = var.ami_id
   #key_name = var.key_name
   instance_type = var.instance_type
+  iam_instance_profile = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
   vpc_security_group_ids = [aws_security_group.l1-final-wordpress-sg.id]
   tags= {
     Name = var.tag_name
