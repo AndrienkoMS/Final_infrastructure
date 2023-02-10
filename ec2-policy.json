@@ -3,7 +3,7 @@
     "Statement": [
       {
         "Action": [
-          "ec2:*"
+          "rds:*"
         ],
         "Effect": "Allow",
         "Resource": "*"
