@@ -19,8 +19,8 @@ resource "aws_db_instance" "default" {
 
 
 #IAM role to attach to ec2 to connect to DB
-resource "aws_iam_role_policy" "l1-infrastructure-ec2-policy" {
-  name = "l1-infrastructure-ec2-policy"
+resource "aws_iam_role_policy" "l1_infrastructure_ec2_role" {
+  name = "l1_infrastructure_ec2_role"
   role = "$aws_iam_role.l1_infrastructure_ec2_role.id}"
 
   policy = "${file("ec2-policy.json")}"
