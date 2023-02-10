@@ -15,7 +15,7 @@ variable "instance_type" {
 
 variable "security_group" { 
     description = "Name of security group" 
-    default     = "l1-final-infrastructure-jenkins-sgroup" 
+    default     = "l1-final-wordpress-sg" 
 }
 
 variable "tag_name" { 
@@ -64,11 +64,6 @@ variable "dbpassword" {
   type = string
 }
 
-/*
-data "external" "env" {
-  program = ["${path.module}/env.sh"]
-}
-*/
 /*
 
 DB_NAME=WordpressTest
