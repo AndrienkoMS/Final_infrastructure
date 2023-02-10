@@ -21,7 +21,7 @@ resource "aws_db_instance" "default" {
 #IAM role to attach to ec2 to connect to DB
 resource "aws_iam_role_policy" "test_policy" {
   name = "test_policy"
-  role = "$aws_iam_role.test_policy.id}"
+  role = aws_iam_role.test_policy.id
 
   policy = "${file("ec2-policy.json")}"
 }
