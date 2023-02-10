@@ -24,7 +24,8 @@ variable "tag_name" {
 } 
 variable "ami_id" { 
     description = "AMI for Ubuntu Ec2 instance - Ubuntu server 22.04 LTS (HVM), 64 bit" 
-    default     = "ami-09b2a1e33ce552e68" 
+    #default     = "ami-09b2a1e33ce552e68" 
+    default     = "ami-0db6edec9a19e887e" #Ubuntu server 22.04 + Docker CE + Docker Compose
 }
 variable "versioning" {
     type        = bool
