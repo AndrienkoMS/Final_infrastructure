@@ -19,15 +19,15 @@ resource "aws_db_instance" "default" {
 
 
 #IAM role to attach to ec2 to connect to DB
-resource "aws_iam_role_policy" "ec2_role" {
-  name = "ec2_role"
-  role = "$aws_iam_role.ec2_role.id}"
+resource "aws_iam_role_policy" "mysqlrole" {
+  name = "mysqlrole"
+  role = "$aws_iam_role.mysqlrole.id}"
 
   policy = "${file("ec2-policy.json")}"
 }
 
-resource "aws_iam_role" "ec2_role" {
-  name = "ec2_role"
+resource "aws_iam_role" "mysqlrole" {
+  name = "mysqlrole"
 
   assume_role_policy = "${file("ec2-assume-policy.json")}"
 }
@@ -36,7 +36,7 @@ resource "aws_iam_role" "ec2_role" {
 #profile to connect IAM role to ec2
 resource "aws_iam_instance_profile" "l1_infrastructure_ec2_profile" {
   name = "l1_infrastructure_ec2_profile"
-  role = "${aws_iam_role.ec2_role.name}"
+  role = "${aws_iam_role.mysqlrole.name}"
 }
 
 
