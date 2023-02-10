@@ -2,13 +2,8 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "aws_vpc" "main" {
-  cidr_block = "172.16.0.0/16"
-  instance_tenancy = "default"
-  tags = {
-    Name = "main"
-  }
-}
+
+
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
@@ -25,27 +20,33 @@ resource "aws_db_instance" "default" {
 }
 
 
-#Create security group with firewall rules
-/*
-resource "aws_security_group" "jenkins-sg-2022" {
+#Create securit group with firewall rules to have internet trafic on docker container
+resource "aws_security_group" "l1-final-wordpress-sg" {
   name        = var.security_group
   description = "security group for Ec2 instance"
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = 443 #https
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
  ingress {
-    from_port   = 22
+    from_port   = 22 #ssh
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
- # outbound from jenkis server
+   ingress {
+    from_port   = 80 #http
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+ # outbound from wordpress
   egress {
     from_port   = 0
     to_port     = 65535
@@ -57,13 +58,13 @@ resource "aws_security_group" "jenkins-sg-2022" {
     Name = var.security_group
   }
 }
-*/
+
 
 resource "aws_instance" "myFirstInstance" {
   ami           = var.ami_id
   #key_name = var.key_name
   instance_type = var.instance_type
-  #vpc_security_group_ids = [aws_security_group.jenkins-sg-2022.id]
+  vpc_security_group_ids = [aws_security_group.l1-final-wordpress-sg.id]
   tags= {
     Name = var.tag_name
   }
