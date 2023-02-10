@@ -31,7 +31,7 @@ pipeline {
                 sh ('terraform ${terraform_command} -var="dbname=${DB_NAME}" -var="dbuser=${DB_USER}" -var="dbpassword=${DB_PASSWORD}" --auto-approve') 
            }
         }
-        
+        /*
         stage ('Pull docker image') {
             steps {
                 script {
@@ -43,6 +43,6 @@ pipeline {
                 }
             }
         }
-
+*/
     }
 }

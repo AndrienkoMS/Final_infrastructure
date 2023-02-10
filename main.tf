@@ -80,9 +80,29 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
 }
 
 
+#key_pair to be able to connect to instance
+resource "aws_key_pair" "l1_infrastructure_key" {
+  key_name   = "l1_infrastructure_key"
+  public_key = tls_private_key.l1_rsa.public_key_openssh " andrienkoms@gmail.com"
+}
+
+
+# RSA key of size 4096 bits
+resource "tls_private_key" "l1_rsa" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+
+#creating a file on instance to store private_key
+resource "local_file" "l1_infrastructure_key" {
+  content  = tls_private_key.l1_rsa.private_key_pem
+  filename = "tfkey"
+}
+
 resource "aws_instance" "myFirstInstance" {
   ami           = var.ami_id
-  #key_name = var.key_name
+  key_name = "l1_infrastructure_key"
   instance_type = var.instance_type
   iam_instance_profile = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
   vpc_security_group_ids = [aws_security_group.l1-final-wordpress-sg.id]
