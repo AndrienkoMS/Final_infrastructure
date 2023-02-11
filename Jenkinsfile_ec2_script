@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        /*USR = credentials('DOCKERHUB_CREDENTIALS_USR')
-        PSW = credentials('DOCKERHUB_CREDENTIALS_PSW')*/
+        USR = credentials('DOCKERHUB_CREDENTIALS_USR')
+        /*PSW = credentials('DOCKERHUB_CREDENTIALS_PSW')*/
         DB_PASSWORD = credentials('DB_PASSWORD')
     }
 
@@ -22,15 +22,18 @@ pipeline {
                 echo '        type = string' >> variables.tf
                 
                 echo -n '        default     = \"' >> variables.tf
-                echo -n $DB_PASSWORD >> variables.tf
+                echo -n $USR >> variables.tf
                 echo '\"' >> variables.tf
                 
                 echo '}' >> variables.tf
                 echo 'variable \"docker_pass\" {' >> variables.tf
                 echo '        type = string' >> variables.tf
-                echo '        default     = \"$DB_PASSWORD\"' >> variables.tf
+
+                echo -n '        default     = \"' >> variables.tf
+                echo -n $USR >> variables.tf
+                echo '\"' >> variables.tf
+
                 echo '}' >> variables.tf
-                echo $DB_PASSWORD >> variables.tf
                 '''
             }
         }
