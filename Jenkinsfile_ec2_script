@@ -8,9 +8,9 @@ pipeline {
 
     stages {
         stage ('connect to ec2-instance') {
-            
+            sh 'echo "connection"'
         }
-   
+/*   
         stage ('Pull docker image') {
             steps {
                 script {
@@ -22,6 +22,6 @@ pipeline {
                 }
             }
         }
-
+*/
     }
 }
