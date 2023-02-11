@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        USR = credentials('DOCKERHUB_CREDENTIALS_USR')
+        DOCKERHUB_CREDENTIALS_USR = credentials('DB_PASSWORD')
         /*PSW = credentials('DOCKERHUB_CREDENTIALS_PSW')*/
         DB_PASSWORD = credentials('DB_PASSWORD')
     }
@@ -22,7 +22,7 @@ pipeline {
                 echo '        type = string' >> variables.tf
                 
                 echo -n '        default     = \"' >> variables.tf
-                echo -n $USR >> variables.tf
+                echo -n $DOCKERHUB_CREDENTIALS_USR >> variables.tf
                 echo '\"' >> variables.tf
                 
                 echo '}' >> variables.tf
@@ -30,7 +30,7 @@ pipeline {
                 echo '        type = string' >> variables.tf
 
                 echo -n '        default     = \"' >> variables.tf
-                echo -n $USR >> variables.tf
+                echo -n $DOCKERHUB_CREDENTIALS_USR >> variables.tf
                 echo '\"' >> variables.tf
 
                 echo '}' >> variables.tf
