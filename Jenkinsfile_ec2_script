@@ -2,8 +2,6 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
-        /*PSW = credentials('DOCKERHUB_CREDENTIALS_PSW')*/
-        DB_PASSWORD = credentials('DB_PASSWORD')
     }
 
     stages {
@@ -30,7 +28,7 @@ pipeline {
                 echo '        type = string' >> variables.tf
 
                 echo -n '        default     = \"' >> variables.tf
-                echo -n $DOCKERHUB_CREDENTIALS_USR >> variables.tf
+                echo -n $DOCKERHUB_CREDENTIALS_PSW >> variables.tf
                 echo '\"' >> variables.tf
 
                 echo '}' >> variables.tf
