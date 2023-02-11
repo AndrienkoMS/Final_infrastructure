@@ -20,7 +20,11 @@ pipeline {
                 echo "" >> variables.tf
                 echo 'variable \"docker_user\" {' >> variables.tf
                 echo '        type = string' >> variables.tf
-                echo '        default     = \"$DB_PASSWORD\"' >> variables.tf
+                
+                echo -n '        default     = \"' >> variables.tf
+                echo -n $DB_PASSWORD >> variables.tf
+                echo '\"' >> variables.tf
+                
                 echo '}' >> variables.tf
                 echo 'variable \"docker_pass\" {' >> variables.tf
                 echo '        type = string' >> variables.tf
