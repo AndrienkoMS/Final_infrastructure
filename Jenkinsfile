@@ -25,13 +25,24 @@ pipeline {
             }
         }
         
+        stage ('Connect to docker') {
+            steps {
+                script {
+                    sh '''
+                        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                    '''
+                }
+            }
+        }
+
         stage ("Action") {
             steps {
                 echo "Terraform is going to do command --> ${terraform_command}"
                 sh ('terraform ${terraform_command} -var="dbname=${DB_NAME}" -var="dbuser=${DB_USER}" -var="dbpassword=${DB_PASSWORD}" --auto-approve') 
            }
         }
-        /*
+        
+/*        
         stage ('Pull docker image') {
             steps {
                 script {
