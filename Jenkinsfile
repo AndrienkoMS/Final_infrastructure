@@ -25,16 +25,6 @@ pipeline {
             }
         }
         
-        stage ('Connect to docker') {
-            steps {
-                script {
-                    sh '''
-                        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                    '''
-                }
-            }
-        }
-
         stage ("Action") {
             steps {
                 echo "Terraform is going to do command --> ${terraform_command}"
