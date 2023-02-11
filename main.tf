@@ -117,6 +117,9 @@ resource "aws_instance" "myFirstInstance" {
   tags= {
     Name = var.tag_name
   }
+
+  #USERDATA - pull container from dockerhub and run it
+  user_data = file("ec2_script.sh")
 }
 
 # Create Elastic IP address
