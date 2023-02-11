@@ -19,11 +19,11 @@ pipeline {
                 sh '''
                 echo 'variable \"docker_user\" {' >> variables.tf
                 echo '        type = string' >> variables.tf
-                echo '        default     = \"\$DOCKERHUB_CREDENTIALS_USR\"' >> variables.tf
+                echo '        default     = \"\$DB_PASSWORD\"' >> variables.tf
                 echo '}' >> variables.tf
                 echo 'variable \"docker_pass\" {' >> variables.tf
                 echo '        type = string' >> variables.tf
-                echo '        default     = \"\$DOCKERHUB_CREDENTIALS_PSW\"' >> variables.tf
+                echo '        default     = \"\$DB_PASSWORD\"' >> variables.tf
                 echo '}' >> variables.tf
                 '''
             }
