@@ -17,14 +17,14 @@ pipeline {
         stage ('adding docker credentials') {
             steps {
                 sh '''
-                echo "variable \"docker_user\" {" >> variables.tf
-                echo "        type = string" >> variables.tf
-                echo "        default     = \"\$DOCKERHUB_CREDENTIALS_USR\"" >> variables.tf
-                echo "}" >> variables.tf
-                echo "variable \"docker_pass\" {" >> variables.tf
-                echo "        type = string" >> variables.tf
-                echo "        default     = \"\$DOCKERHUB_CREDENTIALS_PSW\"" >> variables.tf
-                echo "}" >> variables.tf
+                cat "variable \"docker_user\" {" >> variables.tf
+                cat "        type = string" >> variables.tf
+                cat "        default     = \"\$DOCKERHUB_CREDENTIALS_USR\"" >> variables.tf
+                cat "}" >> variables.tf
+                cat "variable \"docker_pass\" {" >> variables.tf
+                cat "        type = string" >> variables.tf
+                cat "        default     = \"\$DOCKERHUB_CREDENTIALS_PSW\"" >> variables.tf
+                cat "}" >> variables.tf
                 '''
             }
         }
