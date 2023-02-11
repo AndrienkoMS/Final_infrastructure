@@ -17,6 +17,7 @@ pipeline {
         stage ('adding docker credentials') {
             steps {
                 sh '''
+                echo "" >> variables.tf
                 echo 'variable \"docker_user\" {' >> variables.tf
                 echo '        type = string' >> variables.tf
                 echo '        default     = \"$DB_PASSWORD\"' >> variables.tf
@@ -25,6 +26,7 @@ pipeline {
                 echo '        type = string' >> variables.tf
                 echo '        default     = \"$DB_PASSWORD\"' >> variables.tf
                 echo '}' >> variables.tf
+                echo $DB_PASSWORD >> variables.tf
                 '''
             }
         }
