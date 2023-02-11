@@ -72,3 +72,4 @@ DB_PASSWORD=01340134
 DB_HOST=database-1.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306
 */
 #---- ----- end mysql database credentials ----- ----#
+#---- ----- docker credentials ----- ----#

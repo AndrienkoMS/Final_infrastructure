@@ -8,11 +8,25 @@ pipeline {
 
     stages {
         stage ('connect to ec2-instance') {
-            steps{         
+            steps {         
             sh 'echo "connection"'
             sh 'pwd'
             sh 'ls -la'
               }
+        }
+        stage ('adding docker credentials') {
+            steps {
+                sh '''
+                echo "variable \"docker_user\" {" >> variables.tf
+                echo "        type = string" >> variables.tf
+                echo "        default     = \"\$DOCKERHUB_CREDENTIALS_USR\"" >> variables.tf
+                echo "}" >> variables.tf
+                echo "variable \"docker_pass\" {" >> variables.tf
+                echo "        type = string" >> variables.tf
+                echo "        default     = \"\$DOCKERHUB_CREDENTIALS_PSW\"" >> variables.tf
+                echo "}" >> variables.tf
+                '''
+            }
         }
 /*   
         stage ('Pull docker image') {
