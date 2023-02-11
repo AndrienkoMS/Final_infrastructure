@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS_USR = credentials('DOCKERHUB_CREDENTIALS_USR')
-        DOCKERHUB_CREDENTIALS_PSW = credentials('DOCKERHUB_CREDENTIALS_PSW')
+        /*USR = credentials('DOCKERHUB_CREDENTIALS_USR')
+        PSW = credentials('DOCKERHUB_CREDENTIALS_PSW')*/
         DB_PASSWORD = credentials('DB_PASSWORD')
     }
 
