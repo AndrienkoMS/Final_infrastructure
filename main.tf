@@ -5,7 +5,7 @@ provider "aws" {
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
-  identifier = "WordpressDB"
+  identifier = "wordpressdb"
   engine = "mysql"
   engine_version = "8.0.28"
   instance_class = "db.t2.micro"
