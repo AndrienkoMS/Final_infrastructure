@@ -2,8 +2,8 @@
 echo "Running bash script!"
 sudo apt-get update
 
-#docker stop $(docker ps -a -q) || echo "Nothing to stop"
-#docker rm $(docker ps -a -q) || echo "Nothing to delete"
+docker stop $(docker ps -a -q) || echo "Nothing to stop"
+docker rm $(docker ps -a -q) || echo "Nothing to delete"
 
 echo Qwerty0134! | docker login -u andrienkoms --password-stdin
 docker pull andrienkoms/final:latest
