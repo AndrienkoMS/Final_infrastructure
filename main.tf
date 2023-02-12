@@ -5,7 +5,7 @@ provider "aws" {
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
-  identifier = "l1-mysql-db"
+  identifier = "WordpressDB"
   engine = "mysql"
   engine_version = "8.0.28"
   instance_class = "db.t2.micro"
@@ -79,14 +79,14 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+/*
   ingress {
     from_port   = 0 #TCP
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+*/
  # outbound from wordpress
   egress {
     from_port   = 0
@@ -122,7 +122,7 @@ resource "local_file" "l1_infrastructure_key" {
 }
 
 
-resource "aws_instance" "myFirstInstance" {
+resource "aws_instance" "WordpressInstance" {
   ami           = var.ami_id
   key_name = "l1_infrastructure_key"
   instance_type = var.instance_type
@@ -138,9 +138,9 @@ resource "aws_instance" "myFirstInstance" {
 
 # Create Elastic IP address
 /*
-resource "aws_eip" "myFirstInstance" {
+resource "aws_eip" "WordpressInstance" {
   vpc      = true
-  instance = aws_instance.myFirstInstance.id
+  instance = aws_instance.WordpressInstance.id
 tags= {
     Name = "my_elastic_ip"
   }
