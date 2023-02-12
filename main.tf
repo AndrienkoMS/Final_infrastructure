@@ -74,9 +74,9 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
   }
 
     ingress {
-    from_port   = 8000
+    from_port   = 8000 #TCP
     to_port     = 8000
-    protocol    = "tcp"
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
