@@ -62,6 +62,7 @@ variable "dbpassword" {
 
 variable "dbhost" {
   type = string
+  default = "database-1.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306"
 }
 
 /*
