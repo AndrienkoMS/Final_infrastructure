@@ -5,6 +5,7 @@ resource "aws_launch_configuration" "l1-launch-config" {
     #spot_price      = "0.001" #(Optional; Default: On-demand price) The maximum price to use for reserving spot instances.
     key_name        = aws_key_pair.l1_infrastructure_key.key_name
     #key_name        = aws_key_pair.autoscaling_key.name
+    user_data = file("ec2_script.sh")
     
   lifecycle {
     create_before_destroy = true
