@@ -96,7 +96,7 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
   }
 
   tags= {
-    Name = l1-final-wordpress-sg
+    Name = "l1-final-wordpress-sg"
   }
 }
 
