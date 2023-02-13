@@ -26,30 +26,7 @@ resource "aws_autoscaling_group" "l1-group-autoscaling" {
         value                 = "l1_ec2_instance"
         propagate_at_launch   = true #(Required) Enables propagation of the tag to Amazon EC2 instances launched via this ASG
     }
-    /*desired_capacity          = 4
-    placement_group           = aws_placement_group.test.id
-  
-
-
-  initial_lifecycle_hook {
-    name                 = "foobar"
-    default_result       = "CONTINUE"
-    heartbeat_timeout    = 2000
-    lifecycle_transition = "autoscaling:EC2_INSTANCE_LAUNCHING"
-
-    notification_metadata = <<EOF
-{
-  "foo": "bar"
 }
-EOF
-
-    notification_target_arn = "arn:aws:sqs:us-east-1:444455556666:queue1*"
-    role_arn                = "arn:aws:iam::123456789012:role/S3Access"
-    */
-  }
-
-
-
 
 /*
 resource "aws_instance" "WordpressInstance" {
