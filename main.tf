@@ -42,7 +42,7 @@ resource "aws_iam_instance_profile" "l1_infrastructure_ec2_profile" {
 
 #Create securit group with firewall rules to have internet trafic on docker container
 resource "aws_security_group" "l1-final-wordpress-sg" {
-  name        = var.security_group
+  name        = "l1-final-wordpress-sg"
   description = "security group for Ec2 instance"
 
   ingress {
@@ -96,7 +96,7 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
   }
 
   tags= {
-    Name = var.security_group
+    Name = "l1-final-wordpress-sg"
   }
 }
 
@@ -124,7 +124,7 @@ resource "local_file" "l1_infrastructure_key" {
 
 resource "aws_instance" "WordpressInstance" {
   ami                     = var.ami_id
-  key_name                = var.key_name
+  key_name                = var.key_name  
   instance_type           = var.instance_type
   iam_instance_profile    = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
   vpc_security_group_ids  = [aws_security_group.l1-final-wordpress-sg.id]

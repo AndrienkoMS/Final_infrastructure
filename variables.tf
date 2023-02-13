@@ -13,11 +13,6 @@ variable "instance_type" {
     default     =  "t2.micro" 
 }
 
-variable "security_group" { 
-    description = "Name of security group" 
-    default     = "l1-final-wordpress-sg" 
-}
-
 variable "tag_name" { 
     description = "Tag Name of for Ec2 instance" 
     default     = "WordpressInstance" 
@@ -62,6 +57,10 @@ variable "dbuser" {
 }
 
 variable "dbpassword" {
+  type = string
+}
+
+variable "dbhost" {
   type = string
 }
 
