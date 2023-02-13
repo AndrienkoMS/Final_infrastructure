@@ -123,11 +123,11 @@ resource "local_file" "l1_infrastructure_key" {
 
 
 resource "aws_instance" "WordpressInstance" {
-  ami           = var.ami_id
-  key_name = var.key_name
-  instance_type = var.instance_type
-  iam_instance_profile = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
-  vpc_security_group_ids = [aws_security_group.l1-final-wordpress-sg.id]
+  ami                     = var.ami_id
+  key_name                = var.key_name
+  instance_type           = var.instance_type
+  iam_instance_profile    = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
+  vpc_security_group_ids  = [aws_security_group.l1-final-wordpress-sg.id]
   tags= {
     Name = var.tag_name
   }
