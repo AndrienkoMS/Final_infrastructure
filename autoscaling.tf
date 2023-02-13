@@ -3,19 +3,20 @@ resource "aws_launch_configuration" "l1-launch-config" {
     image_id        = var.ami_id
     instance_type   = var.instance_type
     #spot_price      = "0.001" #(Optional; Default: On-demand price) The maximum price to use for reserving spot instances.
-    #key_name        = aws_key_pair.l1_infrastructure_key.key_name
-    key_name        = aws_key_pair.autoscaling_key.name
+    key_name        = aws_key_pair.l1_infrastructure_key.key_name
+    #key_name        = aws_key_pair.autoscaling_key.name
     
   lifecycle {
     create_before_destroy = true
   }
 }
 
+/*
 resource "aws_key_pair" "autoscaling_key" {
     key_name = "autoscaling_key"
-    public_key = file(/var/lib/jenkins/workspace/Terraform_infrastructure_pipeline/autoscaling_key)
+    public_key = file("/var/lib/jenkins/workspace/Terraform_infrastructure_pipeline/autoscaling_key")
 }
-
+*/
 resource "aws_autoscaling_group" "l1-group-autoscaling" {
     name                      = "l1-group-autoscaling"
     vpc_zone_identifier       = ["subnet-033bbd9e872782bc2","subnet-0aaaa3f6dadcf369e"]                    #(Optional) - The VPC zone identifier
