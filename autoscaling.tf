@@ -1,5 +1,5 @@
 #define autoscaling launch configuration
-resource "aws_launch_configuration" "as_conf" {
+resource "aws_launch_configuration" "l1-launch-config" {
     name            = "l1-launch-config"
     image_id        = var.ami_id
     instance_type   = var.instance_type
@@ -8,6 +8,56 @@ resource "aws_launch_configuration" "as_conf" {
 
   lifecycle {
     create_before_destroy = true
+  }
+}
+
+#define autoscaling group
+resource "aws_autoscaling_group" "l1-group-autoscaling" {
+    name                      = "l1-group-autoscaling"
+    vpc_zone_identifier       = ["subnet-033bbd9e872782bc2"] #(Optional) - The VPC zone identifier
+    launch_configuration      = aws_launch_configuration.l1-launch-config.name # (Optional) Name of the launch configuration to use
+    min_size                  = 2 #(Required) Minimum size of the Auto Scaling Group
+    max_size                  = 4 #(Required) Maximum size of the Auto Scaling Group.
+    health_check_grace_period = 100 #Time (in seconds) after instance comes into service before checking health.
+    health_check_type         = "EC2" # (Optional) "EC2" or "ELB". Controls how health checking is done
+    force_delete              = true #(Optional) Allows deleting the Auto Scaling Group without waiting for all instances in the pool to terminate
+    tag {
+        key                   = "name"
+        value                 = "l1_ec2_instance"
+        propagate_at_launch   = true #(Required) Enables propagation of the tag to Amazon EC2 instances launched via this ASG
+    }
+    /*desired_capacity          = 4
+    placement_group           = aws_placement_group.test.id
+  
+
+
+  initial_lifecycle_hook {
+    name                 = "foobar"
+    default_result       = "CONTINUE"
+    heartbeat_timeout    = 2000
+    lifecycle_transition = "autoscaling:EC2_INSTANCE_LAUNCHING"
+
+    notification_metadata = <<EOF
+{
+  "foo": "bar"
+}
+EOF
+
+    notification_target_arn = "arn:aws:sqs:us-east-1:444455556666:queue1*"
+    role_arn                = "arn:aws:iam::123456789012:role/S3Access"
+    */
+  }
+
+
+
+  timeouts {
+    delete = "15m"
+  }
+
+  tag {
+    key                 = "lorem"
+    value               = "ipsum"
+    propagate_at_launch = false
   }
 }
 
