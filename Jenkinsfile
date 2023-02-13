@@ -41,14 +41,14 @@ pipeline {
         
         stage ("Plan") {
             steps {
-                sh ('terraform plan -var="dbname=${DB_NAME}" -var="dbuser=${DB_USER}" -var="dbpassword=${DB_PASSWORD}" -var="dbhost=${DB_HOST}"') 
+                sh ('terraform plan -var="dbname=${DB_NAME}" -var="dbuser=${DB_USER}" -var="dbpassword=${DB_PASSWORD}" -var="dbname=${DB_NAME}"') 
             }
         }
         
         stage ("Action") {
             steps {
                 echo "Terraform is going to do command --> ${terraform_command}"
-                sh ('terraform ${terraform_command} -var="dbname=${DB_NAME}" -var="dbuser=${DB_USER}" -var="dbpassword=${DB_PASSWORD} -var="dbhost=${DB_HOST}"" --auto-approve') 
+                sh ('terraform ${terraform_command} -var="dbname=${DB_NAME}" -var="dbuser=${DB_USER}" -var="dbpassword=${DB_PASSWORD}" -var="dbname=${DB_NAME}" --auto-approve') 
            }
         }
         
