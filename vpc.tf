@@ -4,7 +4,6 @@ resource "aws_vpc" "l1-vpc" {
     instance_tenancy = "default"
     enable_dns_support = true
     enable_dns_hostnames = true
-    enable_classiclink = false
     tags = {
         Name = "l1-vps"
     }
