@@ -13,7 +13,7 @@ resource "aws_launch_configuration" "l1-launch-config" {
 
 resource "aws_key_pair" "autoscaling_key" {
     key_name = "autoscaling_key"
-    public_key = file("/var/lib/jenkins/workspace/Terraform_infrastructure_pipeline/autoscaling_key")
+    public_key = file(/var/lib/jenkins/workspace/Terraform_infrastructure_pipeline/autoscaling_key)
 }
 
 resource "aws_autoscaling_group" "l1-group-autoscaling" {
