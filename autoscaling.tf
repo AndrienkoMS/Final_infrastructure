@@ -50,16 +50,6 @@ EOF
 
 
 
-  timeouts {
-    delete = "15m"
-  }
-
-  tag {
-    key                 = "lorem"
-    value               = "ipsum"
-    propagate_at_launch = false
-  }
-}
 
 /*
 resource "aws_instance" "WordpressInstance" {
