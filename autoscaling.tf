@@ -4,6 +4,7 @@ resource "aws_launch_configuration" "l1-launch-config" {
     instance_type   = var.instance_type
     #spot_price      = "0.001" #(Optional; Default: On-demand price) The maximum price to use for reserving spot instances.
     key_name        = aws_key_pair.l1_infrastructure_key.key_name
+    vpc_classic_link_security_groups = [aws_security_group.l1-final-wordpress-sg.id]
 
   lifecycle {
     create_before_destroy = true
