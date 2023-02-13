@@ -39,7 +39,7 @@ resource "aws_security_group" "l1-elb-sg" {
         from_port = 80
         to_port = 80
         protocol = "tcp"
-        security_groups = [aws_security_group.l1-elb-sg.id]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     egress {
