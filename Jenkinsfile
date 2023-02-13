@@ -17,7 +17,7 @@ pipeline {
         stage ('create envfile for ec2 script'){
             steps {
                 sh '''
-                rm myenvfile
+                rm myenvfile || echo "myenvfile doesn\'t exist"
                 echo -n 'DB_NAME=' >> myenvfile
                 echo $DB_NAME >> myenvfile
                 
