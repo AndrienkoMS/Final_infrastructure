@@ -5,13 +5,13 @@ provider "aws" {
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
-  identifier = "wordpressdb"
-  engine = "mysql"
-  engine_version = "8.0.28"
-  instance_class = "db.t2.micro"
-  name     = var.dbname
-  username = var.dbuser
-  password = var.dbpassword
+  identifier        = "wordpressdb"
+  engine            = "mysql"
+  engine_version    = "8.0.28"
+  instance_class    = "db.t2.micro"
+  name              = var.dbname
+  username          = var.dbuser
+  password          = var.dbpassword
   allocated_storage = 5
   #parameter_group_name = "default.mysql5.7"
   skip_final_snapshot = true
