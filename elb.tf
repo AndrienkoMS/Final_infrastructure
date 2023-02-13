@@ -65,7 +65,8 @@ resource "aws_security_group" "l1-instance-sg" {
         from_port = 22
         to_port = 80
         protocol = "tcp"
-        security_groups = [aws_security_group.l1-elb-sg.id]
+        #security_groups = [aws_security_group.l1-elb-sg.id]
+        security_groups = ["0.0.0.0/0"]
     }
 /*
     ingress {
