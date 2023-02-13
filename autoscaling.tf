@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "l1-launch-config" {
-    name            = "l1-launch-config"
+    #name            = "l1-launch-config" #caused an error - AlreadyExists: Launch Configuration by this name already exists
     image_id        = var.ami_id
     instance_type   = var.instance_type
     #spot_price      = "0.001" #(Optional; Default: On-demand price) The maximum price to use for reserving spot instances.
