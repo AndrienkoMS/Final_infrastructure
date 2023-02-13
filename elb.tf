@@ -3,6 +3,7 @@ resource "aws_elb" "l1-elb" {
     name               = "l1-elb"
     subnets = [aws_subnet.l1vpc-public-1.id,aws_subnet.l1vpc-public-2.id]
     security_groups = [aws_security_group.l1-elb-sg.id]
+    internal = true
   #availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
 
   listener {
