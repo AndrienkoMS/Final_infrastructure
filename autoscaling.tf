@@ -5,6 +5,7 @@ resource "aws_launch_configuration" "as_conf" {
     instance_type   = var.instance_type
     #spot_price      = "0.001" #(Optional; Default: On-demand price) The maximum price to use for reserving spot instances.
     key_name        = aws_key_pair.l1_infrastructure_key.key_name
+    tags            = var.tags
 
   lifecycle {
     create_before_destroy = true
