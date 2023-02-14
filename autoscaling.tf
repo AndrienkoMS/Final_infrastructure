@@ -2,8 +2,8 @@ resource "aws_launch_configuration" "l1-launch-config" {
     #name            = "l1-launch-config" #caused an error - AlreadyExists: Launch Configuration by this name already exists
     image_id        = var.ami_id
     instance_type   = var.instance_type
-    key_name        = aws_key_pair.l1_infrastructure_key.key_name
-    #key_name        = aws_key_pair.autoscaling_key.name
+    key_name        = var.key_name
+    #key_name        = aws_key_pair.l1_infrastructure_key.key_name
     security_groups = [aws_security_group.l1-instance-sg.id]
     #security_groups = [aws_security_group.l1-final-wordpress-sg.id]
     user_data = file("ec2_script.sh")
