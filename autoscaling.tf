@@ -29,7 +29,7 @@ resource "aws_autoscaling_group" "l1-group-autoscaling" {
     launch_configuration      = aws_launch_configuration.l1-launch-config.name  #(Optional) Name of the launch configuration to use
     min_size                  = 1                                               #(Required) Minimum size of the Auto Scaling Group
     max_size                  = 4                                               #(Required) Maximum size of the Auto Scaling Group.
-    health_check_grace_period = 60                                              #Time (in seconds) after instance comes into service before checking health.
+    health_check_grace_period = 40                                              #Time (in seconds) after instance comes into service before checking health.
     health_check_type         = "EC2"                                           #(Optional) "EC2" or "ELB". Controls how health checking is done
     force_delete              = true            #(Optional) Allows deleting the Auto Scaling Group without waiting for all instances in the pool to terminate
     tag {
@@ -44,7 +44,7 @@ resource "aws_autoscaling_policy" "l1-cpu-policy" {
     scaling_adjustment     = 1                  #(Optional) Number of instances by which to scale
     autoscaling_group_name = aws_autoscaling_group.l1-group-autoscaling.name
     adjustment_type        = "ChangeInCapacity"
-    cooldown               = 60                 #(Optional) Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start
+    cooldown               = 40                 #(Optional) Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start
     policy_type = "SimpleScaling"   #(Optional) Policy type, either "SimpleScaling", "StepScaling", "TargetTrackingScaling", or "PredictiveScaling". If this value isn't provided, AWS will default to "SimpleScaling."
 }
 
@@ -58,7 +58,7 @@ resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm" {
     namespace           = "AWS/EC2"
     period              = "120"                             #(Required) The period in seconds over which the specified stat is applied
     statistic           = "Average"
-    threshold           = "30"
+    threshold           = "40"
 
     dimensions = {
         AutoScalingGroupName = aws_autoscaling_group.l1-group-autoscaling.name
@@ -85,7 +85,7 @@ resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm-scaledown" {
     evaluation_periods  = "2"                               #(Required) The number of periods over which data is compared to the specified threshold
     metric_name         = "CPUUtilization"                  #(Optional) The name for the alarm's associated metric
     namespace           = "AWS/EC2"
-    period              = "120"                             #(Required) The period in seconds over which the specified stat is applied
+    period              = "60"                             #(Required) The period in seconds over which the specified stat is applied
     statistic           = "Average"
     threshold           = "10"
 
