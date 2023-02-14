@@ -56,9 +56,9 @@ resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm" {
     evaluation_periods  = "2"                               #(Required) The number of periods over which data is compared to the specified threshold
     metric_name         = "CPUUtilization"                  #(Optional) The name for the alarm's associated metric
     namespace           = "AWS/EC2"
-    period              = "120"                             #(Required) The period in seconds over which the specified stat is applied
+    period              = "60"                             #(Required) The period in seconds over which the specified stat is applied
     statistic           = "Average"
-    threshold           = "40"
+    threshold           = "70"
 
     dimensions = {
         AutoScalingGroupName = aws_autoscaling_group.l1-group-autoscaling.name
