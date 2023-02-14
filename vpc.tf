@@ -38,11 +38,6 @@ resource "aws_route_table" "l1-rt" {
     gateway_id = aws_internet_gateway.gw.id
   }
 
-  route {
-    cidr_block = "172.25.3.0/24"
-    gateway_id = aws_internet_gateway.gw.id
-  }
-
   tags = {
     Name = "l1-rt"
   }
