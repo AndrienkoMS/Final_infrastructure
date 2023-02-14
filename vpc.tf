@@ -34,7 +34,12 @@ resource "aws_route_table" "l1-rt" {
   vpc_id = aws_vpc.l1-vpc.id
 
   route {
-    cidr_block = "::/0"
+    cidr_block = "172.25.2.0/24"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+
+  route {
+    cidr_block = "172.25.3.0/24"
     gateway_id = aws_internet_gateway.gw.id
   }
 
