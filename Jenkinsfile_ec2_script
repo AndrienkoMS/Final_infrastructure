@@ -2,6 +2,10 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
+        DB_NAME = credentials('DB_NAME')
+        DB_USER = credentials('DB_USER')
+        DB_PASSWORD = credentials('DB_PASSWORD')
+        DB_HOST = credentials('DB_HOST')
     }
 
     stages {
@@ -35,6 +39,25 @@ pipeline {
                 '''
             }
         }
+        stage ('adding credentials to user_data') {
+            sh '''
+                echo "" >> ec2_script1.sh
+                echo -n "echo " >> ec2_script1.sh; echo -n $DOCKERHUB_CREDENTIALS_PSW >> ec2_script1.sh; echo -n " \| " >> ec2_script1.sh
+                echo -n "docker login -u" >> ec2_script1.sh; echo -n $DOCKERHUB_CREDENTIALS_USR >> ec2_script1.sh; echo "--password-stdin" >> ec2_script1.sh
+
+                echo "docker pull andrienkoms/final:latest" >> ec2_script1.sh
+
+                echo -n "docker run -e WORDPRESS_DB_HOST=" >> ec2_script1.sh; echo -n $DB_HOST >> ec2_script1.sh; echo -n " -e WORDPRESS_DB_USER=" >> ec2_script1.sh
+                echo -n $DB_USER >> ec2_script1.sh; echo -n " -e WORDPRESS_DB_PASSWORD=" >> ec2_script1.sh; echo -n $DB_PASSWORD
+                echo -n " -p 8000:80 -d andrienkoms/final"
+            '''
+        }
+        /*
+        echo Qwerty0134! | docker login -u andrienkoms --password-stdin
+docker pull andrienkoms/final:latest
+
+docker run --name wp-cont -e WORDPRESS_DB_HOST=wordpressdb.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306 -e WORDPRESS_DB_USER=admin -e WORDPRESS_DB_PASSWORD=01340134 -p 8000:80 -d andrienkoms/final
+*/
 /*   
         stage ('Pull docker image') {
             steps {
