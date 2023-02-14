@@ -39,6 +39,26 @@ pipeline {
                 '''
             }
         }
+        
+        stage ('create envfile for ec2 script'){
+            steps {
+                sh '''
+                rm myenvfile || echo "myenvfile doesn\'t exist"
+                echo -n 'DB_NAME=' >> myenvfile
+                echo $DB_NAME >> myenvfile
+                
+                echo -n 'DB_USER=' >> myenvfile
+                echo $DB_USER >> myenvfile
+
+                echo -n 'DB_PASSWORD=' >> myenvfile
+                echo $DB_PASSWORD >> myenvfile
+
+                echo -n 'DB_HOST=' >> myenvfile
+                echo $DB_HOST >> myenvfile
+                '''
+            }
+        }
+
         stage ('adding credentials to user_data') {
             steps{
                 sh '''

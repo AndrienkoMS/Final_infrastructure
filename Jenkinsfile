@@ -14,6 +14,22 @@ pipeline {
             }
         }
 
+        stage ('adding credentials to user_data') {
+            steps{
+                sh '''
+                    echo "" >> ec2_script1.sh
+                    echo -n "echo " >> ec2_script1.sh; echo -n $DOCKERHUB_CREDENTIALS_PSW >> ec2_script1.sh; echo -n " | docker login -u " >> ec2_script1.sh
+                    echo -n $DOCKERHUB_CREDENTIALS_USR >> ec2_script1.sh; echo " --password-stdin" >> ec2_script1.sh
+
+                    echo "docker pull andrienkoms/final:latest" >> ec2_script1.sh
+
+                    echo -n "docker run -e WORDPRESS_DB_HOST=" >> ec2_script1.sh; echo -n $DB_HOST >> ec2_script1.sh; echo -n " -e WORDPRESS_DB_USER=" >> ec2_script1.sh
+                    echo -n $DB_USER >> ec2_script1.sh; echo -n " -e WORDPRESS_DB_PASSWORD=" >> ec2_script1.sh; echo -n $DB_PASSWORD >> ec2_script1.sh
+                    echo -n " -p 8000:80 -d andrienkoms/final" >> ec2_script1.sh
+                '''
+            }
+        }
+
         stage ('create envfile for ec2 script'){
             steps {
                 sh '''
