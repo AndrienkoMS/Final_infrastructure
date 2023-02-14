@@ -7,10 +7,10 @@ resource "aws_elb" "l1-elb" {
   #availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
 
   listener {
-    instance_port     = 80
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
+    instance_port     = 8000
+    instance_protocol = "tcp"
+    lb_port           = 8000
+    lb_protocol       = "tcp"
   }
 
   health_check {
