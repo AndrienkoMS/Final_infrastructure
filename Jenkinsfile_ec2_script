@@ -43,7 +43,7 @@ pipeline {
             steps{
                 sh '''
                     echo "" >> ec2_script1.sh
-                    echo -n "echo " >> ec2_script1.sh; echo -n $DOCKERHUB_CREDENTIALS_PSW >> ec2_script1.sh; echo -n " | docker login -u" >> ec2_script1.sh
+                    echo -n "echo " >> ec2_script1.sh; echo -n $DOCKERHUB_CREDENTIALS_PSW >> ec2_script1.sh; echo -n " | docker login -u " >> ec2_script1.sh
                     echo -n $DOCKERHUB_CREDENTIALS_USR >> ec2_script1.sh; echo " --password-stdin" >> ec2_script1.sh
 
                     echo "docker pull andrienkoms/final:latest" >> ec2_script1.sh
