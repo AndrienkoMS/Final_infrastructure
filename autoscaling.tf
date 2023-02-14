@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "l1-launch-config" {
-    name = var.build
+    #name = var.build
     name            = "l1-launch-config" #caused an error - AlreadyExists: Launch Configuration by this name already exists
     #name            = "!Select [2, !Split ['/', !Ref AWS::StackId]]"
     image_id        = var.ami_id
