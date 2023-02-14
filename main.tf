@@ -135,14 +135,3 @@ resource "aws_instance" "WordpressInstance" {
   #USERDATA - pull container from dockerhub and run it
   user_data = file("ec2_script.sh")
 }
-
-# Create Elastic IP address
-/*
-resource "aws_eip" "WordpressInstance" {
-  vpc      = true
-  instance = aws_instance.WordpressInstance.id
-tags= {
-    Name = "my_elastic_ip"
-  }
-}
-*/

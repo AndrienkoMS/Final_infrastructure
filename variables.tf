@@ -51,6 +51,10 @@ variable "dbhost" {
   default = "database-1.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306"
 }
 
+variable "build" {
+    type = string
+    default = "default-build"
+}
 /*
 DB_NAME=WordpressTest
 DB_USER=admin
