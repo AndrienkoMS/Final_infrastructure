@@ -1,7 +1,6 @@
 resource "aws_launch_configuration" "l1-launch-config" {
     name_prefix = "autoscale-${var.build}"
     #name            = "l1-launch-config" #caused an error - AlreadyExists: Launch Configuration by this name already exists
-    name            = "!Select [2, !Split ['/', !Ref AWS::StackId]]"
     image_id        = var.ami_id
     instance_type   = var.instance_type
     key_name        = var.key_name
