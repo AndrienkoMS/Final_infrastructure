@@ -134,4 +134,7 @@ resource "aws_instance" "WordpressInstance" {
 
   #USERDATA - pull container from dockerhub and run it
   user_data = file("ec2_script.sh")
+  depends_on = [
+    aws_db_instance.default
+  ]
 }
