@@ -22,11 +22,6 @@ variable "ami_id" {
     #default     = "ami-09b2a1e33ce552e68" 
     default     = "ami-0db6edec9a19e887e" #Ubuntu server 22.04 + Docker CE + Docker Compose
 }
-variable "versioning" {
-    type        = bool
-    description = "(Optional) A state of versioning."
-    default     = true
-}
 
 variable "tags" {
     type        = map
