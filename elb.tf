@@ -37,9 +37,9 @@ resource "aws_security_group" "l1-elb-sg" {
     description = "security group for ELB"
 
     ingress {
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
