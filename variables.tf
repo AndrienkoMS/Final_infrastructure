@@ -10,7 +10,7 @@ variable "key_name" {
 
 variable "instance_type" { 
     description = "instance type for ec2" 
-    default     =  "t2.micro" 
+    default     =  "t2.medium" 
 }
 
 variable "tag_name" { 
@@ -28,11 +28,6 @@ variable "versioning" {
     default     = true
 }
 
-variable "bucket_prefix" {
-    type        = string
-    description = "(required since we are not using 'bucket') Creates a unique bucket name beginning with the specified prefix"
-    default     = "l1-final-infrastructure-s3bucket-"
-}
 variable "tags" {
     type        = map
     description = "(Optional) A mapping of tags to assign to the bucket."
