@@ -47,17 +47,14 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.l1-vpc.id
 }
 
-resource "aws_route_table" "table" {
-    vpc_id = "${aws_vpc.l1-vpc.id}"
-    route {
-        cidr_block = "0.0.0.0/0"
-        gateway_id = "${aws_internet_gateway.gw.id}"
-    }
-}
-/*
 #create an association between a route table and a subnet 
 resource "aws_route_table_association" "a" {
   subnet_id      = aws_subnet.l1vpc-public-1.id
-  route_table_id = "rtb-030451465d369c659"
+  route_table_id = aws_route_table.l1-rt.id
 }
-*/
+
+#create an association between a route table and a subnet 
+resource "aws_route_table_association" "a" {
+  subnet_id      = aws_subnet.l1vpc-public-2.id
+  route_table_id = aws_route_table.l1-rt.id
+}
