@@ -51,12 +51,13 @@ pipeline {
                 sh ('terraform ${terraform_command} -var="dbname=${DB_NAME}" -var="dbuser=${DB_USER}" -var="dbpassword=${DB_PASSWORD}" -var="dbname=${DB_NAME}" --auto-approve') 
            }
         }
-
-        post {
-            always {
-                emailext attachLog: true, body: '', subject: 'email report', to: 'sgizov@ukr.net'
-            }
+    }
+    
+    post {
+        always {
+            emailext attachLog: true, body: '', subject: 'email report', to: 'sgizov@ukr.net'
         }
+    }
         
 /*        
         stage ('Pull docker image') {
@@ -71,5 +72,5 @@ pipeline {
             }
         }
 */
-    }
+    
 }
