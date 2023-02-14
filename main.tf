@@ -129,7 +129,7 @@ resource "aws_instance" "WordpressInstance" {
   iam_instance_profile    = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
   vpc_security_group_ids  = [aws_security_group.l1-final-wordpress-sg.id]
   tags= {
-    Name = var.tag_name-${var.build}
+    Name = var.tag_name-var.build
   }
 
   #USERDATA - pull container from dockerhub and run it
