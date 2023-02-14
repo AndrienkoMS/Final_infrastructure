@@ -29,6 +29,7 @@ pipeline {
                     echo -n " -p 8000:80 -d andrienkoms/final" >> ec2_script.sh
                 '''
                 sh 'cat ec2_script.sh'
+                sh 'pwd'
             }
         }
 
@@ -53,6 +54,7 @@ pipeline {
    
         stage ("Terraform init") {
             steps {
+                sh 'pwd'
                 sh ("terraform init") 
             }
         }
