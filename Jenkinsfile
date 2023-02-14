@@ -5,6 +5,7 @@ pipeline {
         DB_USER = credentials('DB_USER')
         DB_PASSWORD = credentials('DB_PASSWORD')
         DB_HOST = credentials('DB_HOST')
+        DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
     }
 
     stages {
@@ -27,6 +28,7 @@ pipeline {
                     echo -n $DB_USER >> ec2_script.sh; echo -n " -e WORDPRESS_DB_PASSWORD=" >> ec2_script.sh; echo -n $DB_PASSWORD >> ec2_script.sh
                     echo -n " -p 8000:80 -d andrienkoms/final" >> ec2_script.sh
                 '''
+                sh 'cat ec2_script.sh'
             }
         }
 
