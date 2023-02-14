@@ -8,6 +8,7 @@ resource "aws_launch_configuration" "l1-launch-config" {
     #security_groups = [aws_security_group.l1-final-wordpress-sg.id]
     user_data = file("ec2_script.sh")
     iam_instance_profile    = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
+    name = var.build
 
     lifecycle {
         create_before_destroy = true
