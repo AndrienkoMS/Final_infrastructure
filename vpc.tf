@@ -29,3 +29,9 @@ resource "aws_subnet" "l1vpc-public-2" {
         Name ="l1vpc-public-2"
     }
 }
+
+#create an association between a route table and a subnet 
+resource "aws_route_table_association" "a" {
+  subnet_id      = aws_subnet.l1vpc-public-1
+  route_table_id = "rtb-030451465d369c659"
+}
