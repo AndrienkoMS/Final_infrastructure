@@ -30,6 +30,10 @@ resource "aws_subnet" "l1vpc-public-2" {
     }
 }
 
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.l1-vpc.id
+}
+
 #create an association between a route table and a subnet 
 resource "aws_route_table_association" "a" {
   subnet_id      = aws_subnet.l1vpc-public-1.id
