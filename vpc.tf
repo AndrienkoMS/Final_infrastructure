@@ -30,6 +30,19 @@ resource "aws_subnet" "l1vpc-public-2" {
     }
 }
 
+resource "aws_route_table" "l1-rt" {
+  vpc_id = aws_vpc.l1-vpc.id
+
+  route {
+    cidr_block = "::/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+
+  tags = {
+    Name = "l1-rt"
+  }
+}
+
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.l1-vpc.id
 }
