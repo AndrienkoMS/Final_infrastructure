@@ -122,7 +122,7 @@ resource "local_file" "l1_infrastructure_key" {
 }
 
 
-resource "aws_instance" "WordpressInstance" {
+resource "aws_instance" "WordpressInstance-${var.build}" {
   ami                     = var.ami_id
   key_name                = var.key_name  
   instance_type           = var.instance_type
