@@ -1,8 +1,8 @@
 #AWS ELB config
-resource "aws_elb" "l1-elb" {
-    name               = "l1-elb"
-    subnets = [aws_subnet.l1vpc-public-1.id,aws_subnet.l1vpc-public-2.id]
-    security_groups = [aws_security_group.l1-elb-sg.id]
+resource "aws_elb" "dev-elb" {
+    name               = "dev-elb"
+    subnets = [aws_subnet.devvpc-public-1.id,aws_subnet.devvpc-public-2.id]
+    security_groups = [aws_security_group.dev-elb-sg.id]
     internal = true
   #availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
 
@@ -26,14 +26,14 @@ resource "aws_elb" "l1-elb" {
   connection_draining_timeout = 400
 
   tags = {
-    Name = "l1-elb"
+    Name = "dev-elb"
   }
 }
 
 #security group for AWS ELB
-resource "aws_security_group" "l1-elb-sg" {
-    vpc_id = aws_vpc.l1-vpc.id
-    name = "l1-elb-sg"
+resource "aws_security_group" "dev-elb-sg" {
+    vpc_id = aws_vpc.dev-vpc.id
+    name = "dev-elb-sg"
     description = "security group for ELB"
 
     ingress {
@@ -51,21 +51,21 @@ resource "aws_security_group" "l1-elb-sg" {
     }
 
     tags = {
-        Name = "l1-elb-sg"
+        Name = "dev-elb-sg"
     }
 }
 
 #security group for instances
-resource "aws_security_group" "l1-instance-sg" {
-    vpc_id = aws_vpc.l1-vpc.id
-    name = "l1-instance-sg"
+resource "aws_security_group" "dev-instance-sg" {
+    vpc_id = aws_vpc.dev-vpc.id
+    name = "dev-instance-sg"
     description = "security group for instances"
 
     ingress {
         from_port = 22
         to_port = 80
         protocol = "tcp"
-        #security_groups = [aws_security_group.l1-elb-sg.id]
+        #security_groups = [aws_security_group.dev-elb-sg.id]
         cidr_blocks = ["0.0.0.0/0"]
     }
 /*
@@ -91,6 +91,6 @@ resource "aws_security_group" "l1-instance-sg" {
     }
 
     tags = {
-        Name = "l1-instance-sg"
+        Name = "dev-instance-sg"
     }
 }

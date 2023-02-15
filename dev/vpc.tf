@@ -1,37 +1,37 @@
 #create AWS VPC
-resource "aws_vpc" "l1-vpc" {
+resource "aws_vpc" "dev-vpc" {
     cidr_block = "172.25.0.0/16"
     instance_tenancy = "default"
     enable_dns_support = true
     enable_dns_hostnames = true
     tags = {
-        Name = "l1-vpc"
+        Name = "dev-vpc"
     }
   
 }
 #public subnets for Elastic Load Balancer
-resource "aws_subnet" "l1vpc-public-1" {
-    vpc_id = aws_vpc.l1-vpc.id
+resource "aws_subnet" "devvpc-public-1" {
+    vpc_id = aws_vpc.dev-vpc.id
     cidr_block = "172.25.2.0/24"
     map_public_ip_on_launch = true
     availability_zone = "us-west-1a"
     tags = {
-        Name ="l1vpc-public-1"
+        Name ="devvpc-public-1"
     }
 }
 
-resource "aws_subnet" "l1vpc-public-2" {
-    vpc_id = aws_vpc.l1-vpc.id
+resource "aws_subnet" "devvpc-public-2" {
+    vpc_id = aws_vpc.dev-vpc.id
     cidr_block = "172.25.3.0/24"
     map_public_ip_on_launch = true
     availability_zone = "us-west-1b"
     tags = {
-        Name ="l1vpc-public-2"
+        Name ="devvpc-public-2"
     }
 }
 
-resource "aws_route_table" "l1-rt" {
-  vpc_id = aws_vpc.l1-vpc.id
+resource "aws_route_table" "dev-rt" {
+  vpc_id = aws_vpc.dev-vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -39,22 +39,22 @@ resource "aws_route_table" "l1-rt" {
   }
 
   tags = {
-    Name = "l1-rt"
+    Name = "dev-rt"
   }
 }
 
 resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.l1-vpc.id
+  vpc_id = aws_vpc.dev-vpc.id
 }
 
 #create an association between a route table and a subnet 
 resource "aws_route_table_association" "a" {
-  subnet_id      = aws_subnet.l1vpc-public-1.id
-  route_table_id = aws_route_table.l1-rt.id
+  subnet_id      = aws_subnet.devvpc-public-1.id
+  route_table_id = aws_route_table.dev-rt.id
 }
 
 #create an association between a route table and a subnet 
 resource "aws_route_table_association" "b" {
-  subnet_id      = aws_subnet.l1vpc-public-2.id
-  route_table_id = aws_route_table.l1-rt.id
+  subnet_id      = aws_subnet.devvpc-public-2.id
+  route_table_id = aws_route_table.dev-rt.id
 }

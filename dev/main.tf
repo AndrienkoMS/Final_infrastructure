@@ -9,7 +9,7 @@ locals {
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
-  vpc_security_group_ids = [aws_security_group.l1-elb-sg.id]
+  vpc_security_group_ids = [aws_security_group.dev-elb-sg.id]
   db_subnet_group_name = aws_db_subnet_group.db_sg.id
   availability_zone = "us-west-1a"
   identifier        = "wordpressdb"
@@ -26,7 +26,7 @@ resource "aws_db_instance" "default" {
 
 resource "aws_db_subnet_group" "db_sg" {
   name       = "wp_subnet_group"
-  subnet_ids = [aws_subnet.l1vpc-public-1.id, aws_subnet.l1vpc-public-2.id]
+  subnet_ids = [aws_subnet.devvpc-public-1.id, aws_subnet.devvpc-public-2.id]
 
   tags = {
     Name = "My DB subnet groups"
@@ -35,30 +35,30 @@ resource "aws_db_subnet_group" "db_sg" {
 
 
 #IAM role to attach to ec2 to connect to DB
-resource "aws_iam_role_policy" "l1_infrastructure_ec2_policy" {
-  name = "l1_infrastructure_ec2_policy"
-  role = aws_iam_role.l1_infrastructure_ec2_policy.id
+resource "aws_iam_role_policy" "dev_infrastructure_ec2_policy" {
+  name = "dev_infrastructure_ec2_policy"
+  role = aws_iam_role.dev_infrastructure_ec2_policy.id
 
   policy = "${file("../modules/ec2-policy.json")}"
 }
 
-resource "aws_iam_role" "l1_infrastructure_ec2_policy" {
-  name = "l1_infrastructure_ec2_policy"
+resource "aws_iam_role" "dev_infrastructure_ec2_policy" {
+  name = "dev_infrastructure_ec2_policy"
 
   assume_role_policy = "${file("../modules/ec2-assume-policy.json")}"
 }
 
 
 #profile to connect IAM role to ec2
-resource "aws_iam_instance_profile" "l1_infrastructure_ec2_profile" {
-  name = "l1_infrastructure_ec2_profile"
-  role = "${aws_iam_role.l1_infrastructure_ec2_policy.name}"
+resource "aws_iam_instance_profile" "dev_infrastructure_ec2_profile" {
+  name = "dev_infrastructure_ec2_profile"
+  role = "${aws_iam_role.dev_infrastructure_ec2_policy.name}"
 }
 
 /*
 #Create securit group with firewall rules to have internet trafic on docker container
-resource "aws_security_group" "l1-final-wordpress-sg" {
-  name        = "l1-l1-final-wordpress-sg"
+resource "aws_security_group" "dev-final-wordpress-sg" {
+  name        = "dev-dev-final-wordpress-sg"
   description = "security group for Ec2 instance"
 
   ingress {
@@ -112,28 +112,28 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
   }
 
   tags= {
-    Name = "l1-l1-final-wordpress-sg"
+    Name = "dev-dev-final-wordpress-sg"
   }
 }
 */
 
 #key_pair to be able to connect to instance
-resource "aws_key_pair" "l1_infrastructure_key" {
+resource "aws_key_pair" "dev_infrastructure_key" {
   key_name   = var.key_name
-  public_key = tls_private_key.l1_rsa.public_key_openssh
+  public_key = tls_private_key.dev_rsa.public_key_openssh
 }
 
 
 # RSA key of size 4096 bits
-resource "tls_private_key" "l1_rsa" {
+resource "tls_private_key" "dev_rsa" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
 
 
 #creating a file on instance to store private_key
-resource "local_file" "l1_infrastructure_key" {
-  content  = tls_private_key.l1_rsa.private_key_pem
+resource "local_file" "dev_infrastructure_key" {
+  content  = tls_private_key.dev_rsa.private_key_pem
   filename = "tfkey"
 }
 
@@ -142,9 +142,9 @@ resource "aws_instance" "WordpressInstance" {
   ami                     = var.ami_id
   key_name                = var.key_name  
   instance_type           = var.instance_type
-  iam_instance_profile    = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
-  #vpc_security_group_ids  = [aws_security_group.l1-elb-sg.id]
-  vpc_security_group_ids  = [aws_security_group.l1-final-wordpress-sg.id]
+  iam_instance_profile    = "${aws_iam_instance_profile.dev_infrastructure_ec2_profile.name}"
+  #vpc_security_group_ids  = [aws_security_group.dev-elb-sg.id]
+  vpc_security_group_ids  = [aws_security_group.dev-final-wordpress-sg.id]
   tags= {
     Name = "WordpressInstance-${var.build}"
   }
