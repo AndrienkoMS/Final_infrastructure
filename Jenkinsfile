@@ -26,6 +26,7 @@ pipeline {
 
                     echo -n "docker run -e WORDPRESS_DB_HOST=" >> ec2_script.sh; echo -n $DB_HOST >> ec2_script.sh; echo -n " -e WORDPRESS_DB_USER=" >> ec2_script.sh
                     echo -n $DB_USER >> ec2_script.sh; echo -n " -e WORDPRESS_DB_PASSWORD=" >> ec2_script.sh; echo -n $DB_PASSWORD >> ec2_script.sh
+                    echo -n " -e DB_NAME=" >> ec2_script.sh; echo -n $DB_NAME >> ec2_script.sh
                     echo -n " -p 8000:80 -d andrienkoms/final" >> ec2_script.sh
                 '''
             }
