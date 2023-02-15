@@ -8,7 +8,7 @@ locals {
 }
 
 #Create RDS MySQL database to store wordpress data
-resource "aws_db_instance" "mysql_db_instance" {
+resource "aws_db_instance" "default" {
   db_subnet_group_name = aws_db_subnet_group.db_sg.id
   availability_zone = "us-west-1a"
   identifier        = "wordpressdb"
@@ -150,7 +150,7 @@ resource "aws_instance" "WordpressInstance" {
   #USERDATA - pull container from dockerhub and run it
   user_data = file("ec2_script.sh")
   depends_on = [
-    aws_db_instance.mysql_db_instance
+    aws_db_instance.default
   ]
 }
 */
