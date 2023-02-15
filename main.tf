@@ -20,8 +20,7 @@ resource "aws_db_instance" "default" {
   password          = var.dbpassword
   allocated_storage = 5
   skip_final_snapshot = true
-  iam_database_authentication_enabled = true
-  vpc_id = aws_vpc.l1-vpc.id
+  publicly_accessible = true
 }
 
 resource "aws_db_subnet_group" "db_sg" {
