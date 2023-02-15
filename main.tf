@@ -15,7 +15,6 @@ resource "aws_db_instance" "default" {
   allocated_storage = 5
   #parameter_group_name = "default.mysql5.7"
   skip_final_snapshot = true
-  vpc_security_group_ids = [aws_vpc.l1-vpc.id]
 }
 
 
