@@ -19,6 +19,7 @@ resource "aws_db_instance" "mysql_db_instance" {
   password          = var.dbpassword
   allocated_storage = 5
   skip_final_snapshot = true
+  iam_database_authentication_enabled = true
 }
 
 resource "aws_db_subnet_group" "db_sg" {
@@ -51,7 +52,7 @@ resource "aws_iam_instance_profile" "l1_infrastructure_ec2_profile" {
   role = "${aws_iam_role.l1_infrastructure_ec2_policy.name}"
 }
 
-
+/*
 #Create securit group with firewall rules to have internet trafic on docker container
 resource "aws_security_group" "l1-final-wordpress-sg" {
   name        = "${local.wsp}-l1-final-wordpress-sg"
@@ -91,14 +92,14 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-/*
-  ingress {
-    from_port   = 0 #TCP
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-*/
+
+  #ingress {
+  #  from_port   = 0 #TCP
+  #  to_port     = 0
+  #  protocol    = "-1"
+  #  cidr_blocks = ["0.0.0.0/0"]
+  #}
+
  # outbound from wordpress
   egress {
     from_port   = 0
@@ -111,7 +112,7 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
     Name = "${local.wsp}-l1-final-wordpress-sg"
   }
 }
-
+*/
 
 #key_pair to be able to connect to instance
 resource "aws_key_pair" "l1_infrastructure_key" {
