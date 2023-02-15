@@ -12,7 +12,16 @@ pipeline {
         stage ("Terraform workspace choose") {
             steps {
                 sh 'echo "environment: ${terraform_workspace}"'
-                sh 'cd ${terraform_workspace}'
+                sh '''
+                    case ${terraform_workspace} in
+                        dev)
+                            cd ${terraform_workspace}
+                            ;;
+                        *)
+                            echo "staying in prod folder"
+                            ;;
+                    esac
+                '''
                 sh 'pwd'
             }
         }
