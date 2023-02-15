@@ -9,7 +9,7 @@ locals {
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
-  db_subnet_group_name = aws_db_subnet_group.db_sg.name
+  db_subnet_group_name = aws_db_subnet_group.db_sg.id
   identifier        = "wordpressdb"
   engine            = "mysql"
   engine_version    = "8.0.28"
