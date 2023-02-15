@@ -51,11 +51,9 @@ variable "build" {
     type = string
     default = "default-build"
 }
-/*
-DB_NAME=WordpressTest
-DB_USER=admin
-DB_PASSWORD=01340134
-DB_HOST=database-1.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306
-*/
 #---- ----- end mysql database credentials ----- ----#
+variable "db_identifier" {
+  type = string
+  default = "wordpressdb"
+}
 #---- ----- docker credentials ----- ----#

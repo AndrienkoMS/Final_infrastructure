@@ -12,7 +12,7 @@ resource "aws_db_instance" "default" {
   vpc_security_group_ids = [aws_security_group.l1-elb-sg.id]
   db_subnet_group_name = aws_db_subnet_group.db_sg.id
   availability_zone = "us-west-1a"
-  identifier        = "wordpressdb"
+  identifier        = var.db_identifier
   engine            = "mysql"
   engine_version    = "8.0.28"
   instance_class    = "db.t2.micro"
