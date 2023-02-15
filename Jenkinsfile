@@ -7,8 +7,9 @@ pipeline {
         DB_HOST = credentials('DB_HOST')
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
     }
-/*
+
     stages {
+/*        
         stage ("Terraform workspace choose") {
             steps {
                 sh 'echo "environment: ${terraform_workspace}"'
