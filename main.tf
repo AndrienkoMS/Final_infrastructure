@@ -2,9 +2,14 @@ provider "aws" {
   region = var.aws_region
 }
 
+locals {
+  infra_env = terraform.workspace
+  # -${local.infra_env}
+}
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
+
   identifier        = "wordpressdb"
   engine            = "mysql"
   engine_version    = "8.0.28"

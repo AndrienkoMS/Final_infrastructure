@@ -50,7 +50,14 @@ pipeline {
                 '''
             }
         }
-   
+
+        stage ("Terraform workspace choose") {
+            steps {
+                /*sh 'terraform workspace select ${terraform_workspace}'*/
+                sh 'new environment: ${terraform_workspace}'
+            }
+        }
+
         stage ("Terraform init") {
             steps {
                 sh ("terraform init") 
