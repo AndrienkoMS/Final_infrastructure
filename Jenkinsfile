@@ -9,6 +9,14 @@ pipeline {
     }
 
     stages {
+        stage ("Terraform workspace choose") {
+            steps {
+                sh 'echo "environment: ${terraform_workspace}"'
+                sh 'cd ${terraform_workspace}'
+                sh 'pwd'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'L1_Final', url: 'git@github.com:AndrienkoMS/Final_infrastructure.git']])
@@ -48,13 +56,6 @@ pipeline {
                 echo -n 'DB_HOST=' >> myenvfile
                 echo $DB_HOST >> myenvfile
                 '''
-            }
-        }
-
-        stage ("Terraform workspace choose") {
-            steps {
-                sh 'echo "environment: ${terraform_workspace}"'
-                sh 'cd ${terraform_workspace}'
             }
         }
 
