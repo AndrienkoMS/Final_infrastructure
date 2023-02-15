@@ -9,7 +9,7 @@ locals {
 
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
-  db_subnet_group_name = [aws_subnet.l1vpc-public-1.name]
+  db_subnet_group_name = aws_db_subnet_group.db_sg.name
   identifier        = "wordpressdb"
   engine            = "mysql"
   engine_version    = "8.0.28"
@@ -21,6 +21,14 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot = true
 }
 
+resource "aws_db_subnet_group" "db_sg" {
+  name       = "wp_subnet_group"
+  subnet_ids = [aws_subnet.l1vpc-public-1.id, aws_subnet.l1vpc-public-2.id]
+
+  tags = {
+    Name = "My DB subnet groups"
+  }
+}
 
 #IAM role to attach to ec2 to connect to DB
 resource "aws_iam_role_policy" "l1_infrastructure_ec2_policy" {
