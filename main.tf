@@ -8,7 +8,7 @@ locals {
 }
 
 #Create RDS MySQL database to store wordpress data
-resource "aws_db_instance" "${local.wsp}-default" {
+resource "aws_db_instance" "default" {
 
   identifier        = "wordpressdb"
   engine            = "mysql"
@@ -46,8 +46,8 @@ resource "aws_iam_instance_profile" "l1_infrastructure_ec2_profile" {
 
 
 #Create securit group with firewall rules to have internet trafic on docker container
-resource "aws_security_group" "l1-final-wordpress-sg" {
-  name        = "l1-final-wordpress-sg"
+resource "aws_security_group" "${local.wsp}-${local.wsp}-l1-final-wordpress-sg" {
+  name        = "${local.wsp}-l1-final-wordpress-sg"
   description = "security group for Ec2 instance"
 
   ingress {
@@ -101,7 +101,7 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
   }
 
   tags= {
-    Name = "l1-final-wordpress-sg"
+    Name = "${local.wsp}-l1-final-wordpress-sg"
   }
 }
 
@@ -133,7 +133,7 @@ resource "aws_instance" "WordpressInstance" {
   instance_type           = var.instance_type
   iam_instance_profile    = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
   #vpc_security_group_ids  = [aws_security_group.l1-elb-sg.id]
-  vpc_security_group_ids  = [aws_security_group.l1-final-wordpress-sg.id]
+  vpc_security_group_ids  = [aws_security_group.${local.wsp}-l1-final-wordpress-sg.id]
   tags= {
     Name = "${var.tag_name}-${var.build}"
   }
