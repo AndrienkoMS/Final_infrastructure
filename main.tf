@@ -3,12 +3,12 @@ provider "aws" {
 }
 
 locals {
-  infra_env = terraform.workspace
-  # -${local.infra_env}
+  wsp = terraform.workspace
+  # ${local.wsp}-
 }
 
 #Create RDS MySQL database to store wordpress data
-resource "aws_db_instance" "default" {
+resource "aws_db_instance" "${local.wsp}-default" {
 
   identifier        = "wordpressdb"
   engine            = "mysql"
