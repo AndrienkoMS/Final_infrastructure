@@ -34,7 +34,7 @@ resource "aws_iam_role_policy" "l1_infrastructure_ec2_policy" {
 resource "aws_iam_role" "l1_infrastructure_ec2_policy" {
   name = "l1_infrastructure_ec2_policy"
 
-  assume_role_policy = "${file("modulesec2-assume-policy.json")}"
+  assume_role_policy = "${file("modules/ec2-assume-policy.json")}"
 }
 
 
