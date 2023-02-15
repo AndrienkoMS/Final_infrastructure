@@ -7,7 +7,7 @@ pipeline {
         DB_HOST = credentials('DB_HOST')
         DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB_CREDENTIALS')
     }
-
+/*
     stages {
         stage ("Terraform workspace choose") {
             steps {
@@ -25,7 +25,7 @@ pipeline {
                 sh 'pwd'
             }
         }
-
+*/
         stage('Checkout') {
             steps {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'L1_Final', url: 'git@github.com:AndrienkoMS/Final_infrastructure.git']])
