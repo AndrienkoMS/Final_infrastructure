@@ -95,18 +95,3 @@ resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm-scaledown" {
 
     alarm_actions     = [aws_autoscaling_policy.l1-cpu-policy-scaledown.arn] #(Optional) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 }
-/*
-resource "aws_instance" "WordpressInstance" {
-  ami           = var.ami_id
-  key_name = var.key_name
-  instance_type = var.instance_type
-  iam_instance_profile = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}"
-  vpc_security_group_ids = [aws_security_group.${local.wsp}-l1-final-wordpress-sg.id]
-  tags= {
-    Name = var.tag_name
-  }
-
-  #USERDATA - pull container from dockerhub and run it
-  user_data = file("ec2_script.sh")
-}
-*/
