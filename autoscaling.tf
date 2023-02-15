@@ -22,8 +22,8 @@ resource "aws_key_pair" "autoscaling_key" {
     public_key = file("/var/lib/jenkins/workspace/Terraform_infrastructure_pipeline/autoscaling_key")
 }
 */
-resource "aws_autoscaling_group" "l1-group-autoscaling" {
-    name                      = "l1-group-autoscaling"
+resource "aws_autoscaling_group" "${local.wsp}-group-autoscaling" {
+    name                      = "${local.wsp}-group-autoscaling"
     vpc_zone_identifier = [aws_subnet.l1vpc-public-1.id,aws_subnet.l1vpc-public-2.id]
     #vpc_zone_identifier       = ["subnet-0aaaa3f6dadcf369e"]                    #(Optional) - The VPC zone identifier  "subnet-033bbd9e872782bc2",
     launch_configuration      = aws_launch_configuration.l1-launch-config.name  #(Optional) Name of the launch configuration to use
@@ -42,7 +42,7 @@ resource "aws_autoscaling_group" "l1-group-autoscaling" {
 resource "aws_autoscaling_policy" "l1-cpu-policy" {
     name                   = "l1-cpu-policy"
     scaling_adjustment     = 1                  #(Optional) Number of instances by which to scale
-    autoscaling_group_name = aws_autoscaling_group.l1-group-autoscaling.name
+    autoscaling_group_name = aws_autoscaling_group.${local.wsp}-group-autoscaling.name
     adjustment_type        = "ChangeInCapacity"
     cooldown               = 40                 #(Optional) Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start
     policy_type = "SimpleScaling"   #(Optional) Policy type, either "SimpleScaling", "StepScaling", "TargetTrackingScaling", or "PredictiveScaling". If this value isn't provided, AWS will default to "SimpleScaling."
@@ -61,7 +61,7 @@ resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm" {
     threshold           = "70"
 
     dimensions = {
-        AutoScalingGroupName = aws_autoscaling_group.l1-group-autoscaling.name
+        AutoScalingGroupName = aws_autoscaling_group.${local.wsp}-group-autoscaling.name
     }
 
     alarm_actions     = [aws_autoscaling_policy.l1-cpu-policy.arn] #(Optional) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
@@ -71,7 +71,7 @@ resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm" {
 resource "aws_autoscaling_policy" "l1-cpu-policy-scaledown" {
     name                   = "l1-cpu-policy-scaledown"
     scaling_adjustment     = -1                 #(Optional) Number of instances by which to scale
-    autoscaling_group_name = aws_autoscaling_group.l1-group-autoscaling.name
+    autoscaling_group_name = aws_autoscaling_group.${local.wsp}-group-autoscaling.name
     adjustment_type        = "ChangeInCapacity"
     cooldown               = 60                 #(Optional) Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start
     policy_type = "SimpleScaling"   #(Optional) Policy type, either "SimpleScaling", "StepScaling", "TargetTrackingScaling", or "PredictiveScaling". If this value isn't provided, AWS will default to "SimpleScaling."
@@ -90,7 +90,7 @@ resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm-scaledown" {
     threshold           = "10"
 
     dimensions = {
-        AutoScalingGroupName = aws_autoscaling_group.l1-group-autoscaling.name
+        AutoScalingGroupName = aws_autoscaling_group.${local.wsp}-group-autoscaling.name
     }
 
     alarm_actions     = [aws_autoscaling_policy.l1-cpu-policy-scaledown.arn] #(Optional) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
