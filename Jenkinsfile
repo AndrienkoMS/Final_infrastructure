@@ -24,11 +24,15 @@ pipeline {
 
                     echo "docker pull andrienkoms/final:latest" >> ec2_script.sh
 
+                    echo "docker run -e WORDPRESS_DB_HOST=wordpressdb.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306 -e WORDPRESS_DB_USER=admin -e WORDPRESS_DB_PASSWORD=01340134 -e WORDPRESS_DB_NAME=wordpressdb -p 8000:80 -d andrienkoms/final" >> ec2_script.sh
+                '''
+/*
                     echo -n "docker run -e WORDPRESS_DB_HOST=" >> ec2_script.sh; echo -n $DB_HOST >> ec2_script.sh; echo -n " -e WORDPRESS_DB_USER=" >> ec2_script.sh
                     echo -n $DB_USER >> ec2_script.sh; echo -n " -e WORDPRESS_DB_PASSWORD=" >> ec2_script.sh; echo -n $DB_PASSWORD >> ec2_script.sh
                     echo -n " -e DB_NAME=" >> ec2_script.sh; echo -n $DB_NAME >> ec2_script.sh
                     echo -n " -p 8000:80 -d andrienkoms/final" >> ec2_script.sh
                 '''
+                */
             }
         }
 
