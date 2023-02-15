@@ -13,10 +13,6 @@ variable "instance_type" {
     default     =  "t2.medium" 
 }
 
-variable "tag_name" { 
-    description = "Tag Name of for Ec2 instance" 
-    default     = "WordpressInstance" 
-} 
 variable "ami_id" { 
     description = "AMI for Ubuntu Ec2 instance - Ubuntu server 22.04 LTS (HVM), 64 bit" 
     #default     = "ami-09b2a1e33ce552e68" 

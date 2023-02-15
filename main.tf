@@ -133,7 +133,7 @@ resource "local_file" "l1_infrastructure_key" {
   filename = "tfkey"
 }
 
-
+/*
 resource "aws_instance" "WordpressInstance" {
   ami                     = var.ami_id
   key_name                = var.key_name  
@@ -142,7 +142,7 @@ resource "aws_instance" "WordpressInstance" {
   #vpc_security_group_ids  = [aws_security_group.l1-elb-sg.id]
   vpc_security_group_ids  = [aws_security_group.l1-final-wordpress-sg.id]
   tags= {
-    Name = "${var.tag_name}-${var.build}"
+    Name = "WordpressInstance-${var.build}"
   }
 
   #USERDATA - pull container from dockerhub and run it
@@ -151,3 +151,4 @@ resource "aws_instance" "WordpressInstance" {
     aws_db_instance.default
   ]
 }
+*/
