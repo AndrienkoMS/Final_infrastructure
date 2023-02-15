@@ -8,11 +8,11 @@ locals {
 }
 
 #Create RDS MySQL database to store wordpress data
-resource "aws_db_instance" "dev-default" {
+resource "aws_db_instance" "default" {
   vpc_security_group_ids = [aws_security_group.dev-elb-sg.id]
   db_subnet_group_name = aws_db_subnet_group.db_sg.id
   availability_zone = "us-west-1a"
-  identifier        = "wordpressdb"
+  identifier        = "dev-wordpressdb"
   engine            = "mysql"
   engine_version    = "8.0.28"
   instance_class    = "db.t2.micro"

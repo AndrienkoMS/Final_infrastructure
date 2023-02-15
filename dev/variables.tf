@@ -44,7 +44,7 @@ variable "dbpassword" {
 
 variable "dbhost" {
   type = string
-  default = "wordpressdb.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306"
+  default = "dev-wordpressdb.cde1mvsw4pqc.us-west-1.rds.amazonaws.com:3306"
 }
 
 variable "build" {
