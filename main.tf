@@ -4,7 +4,7 @@ provider "aws" {
 
 locals {
   wsp = terraform.workspace
-  # ${local.wsp}-
+  # local.wsp-
 }
 
 #Create RDS MySQL database to store wordpress data
@@ -57,7 +57,7 @@ resource "aws_iam_instance_profile" "l1_infrastructure_ec2_profile" {
 /*
 #Create securit group with firewall rules to have internet trafic on docker container
 resource "aws_security_group" "l1-final-wordpress-sg" {
-  name        = "${local.wsp}-l1-final-wordpress-sg"
+  name        = "local.wsp-l1-final-wordpress-sg"
   description = "security group for Ec2 instance"
 
   ingress {
@@ -111,7 +111,7 @@ resource "aws_security_group" "l1-final-wordpress-sg" {
   }
 
   tags= {
-    Name = "${local.wsp}-l1-final-wordpress-sg"
+    Name = "local.wsp-l1-final-wordpress-sg"
   }
 }
 */
