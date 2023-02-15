@@ -21,6 +21,7 @@ resource "aws_db_instance" "default" {
   allocated_storage = 5
   skip_final_snapshot = true
   iam_database_authentication_enabled = true
+  vpc_id = aws_vpc.l1-vpc.id
 }
 
 resource "aws_db_subnet_group" "db_sg" {
@@ -29,6 +30,14 @@ resource "aws_db_subnet_group" "db_sg" {
 
   tags = {
     Name = "My DB subnet groups"
+  }
+}
+
+resource "aws_db_security_group" "default" {
+  name = "rds_sg"
+
+  ingress {
+    cidr = "10.0.0.0/24"
   }
 }
 
