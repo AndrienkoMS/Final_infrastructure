@@ -87,12 +87,12 @@ pipeline {
                 sh '''
                 case ${tfvars_file} in
                     dev.tfvars)
-                        echo "0134" | sudo terraform workspace new dev
-                        echo "0134" | sudo terraform workspace select dev
+                        sudo -S terraform workspace new dev
+                        sudo -S terraform workspace select dev
                         ;;
                     *)
-                        echo "0134" | sudo terraform workspace new prod
-                        echo "0134" | sudo terraform workspace select prod
+                        sudo -S terraform workspace new prod
+                        sudo -S terraform workspace select prod
                             ;;
                     esac
                 '''
