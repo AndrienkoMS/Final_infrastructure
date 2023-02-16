@@ -50,12 +50,14 @@ pipeline {
                             echo -n $DB_USER >> ec2_script.sh; echo -n " -e WORDPRESS_DB_PASSWORD=" >> ec2_script.sh; echo -n $DB_PASSWORD >> ec2_script.sh
                             echo -n " -e WORDPRESS_DB_NAME=" >> ec2_script.sh; echo -n $DB_NAME >> ec2_script.sh
                             echo -n " -p 8000:80 -d andrienkoms/final" >> ec2_script.sh
+                            terraform workspace select dev
                             ;;
                         *)
                             echo -n "docker run -e WORDPRESS_DB_HOST=" >> ec2_script.sh; echo -n $DB_HOST_PROD >> ec2_script.sh; echo -n " -e WORDPRESS_DB_USER=" >> ec2_script.sh
                             echo -n $DB_USER >> ec2_script.sh; echo -n " -e WORDPRESS_DB_PASSWORD=" >> ec2_script.sh; echo -n $DB_PASSWORD >> ec2_script.sh
                             echo -n " -e WORDPRESS_DB_NAME=" >> ec2_script.sh; echo -n $DB_NAME >> ec2_script.sh
                             echo -n " -p 8000:80 -d andrienkoms/final" >> ec2_script.sh
+                            terraform workspace select prod
                             ;;
                     esac
                 '''
@@ -84,18 +86,7 @@ pipeline {
         stage ("Terraform init") {
             steps {
                 sh ("terraform init")
-                /*sh "sudo chown root:jenkins /run/docker.sock"*/
-                sh '''
-                case ${tfvars_file} in
-                    dev.tfvars)
-                        terraform workspace select dev
-                        ;;
-                    *)
 
-                        terraform workspace select prod
-                        ;;
-                    esac
-                '''
             }
         }
         
