@@ -59,7 +59,7 @@ resource "aws_security_group" "l1-elb-sg" {
 #security group for instances
 resource "aws_security_group" "l1-instance-sg" {
     vpc_id = aws_vpc.l1-vpc.id
-    name = "l1-instance-sg"
+    name = var.l1-instance-sg_name
     description = "security group for instances"
 
     ingress {
@@ -92,6 +92,6 @@ resource "aws_security_group" "l1-instance-sg" {
     }
 
     tags = {
-        Name = "l1-instance-sg"
+        Name = var.l1-instance-sg_name
     }
 }

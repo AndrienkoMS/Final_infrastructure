@@ -85,6 +85,12 @@ variable "l1-elb-sg_name" {
   type = string
   default = "l1-elb-sg"
 }
+
+variable "l1-instance-sg_name" {
+  type = string
+  default = "l1-instance-sg"
+}
+
 #==== ===== end deviding workspaces wariables ===== ====#
 
 #---- ----- docker credentials ----- ----#
