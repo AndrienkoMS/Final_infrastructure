@@ -23,11 +23,11 @@ resource "aws_key_pair" "autoscaling_key" {
 }
 */
 resource "aws_autoscaling_group" "l1-group-autoscaling" {
-    name                      = "l1-group-autoscaling"
+    name                      = var.l1-group-autoscaling_name
     vpc_zone_identifier = [aws_subnet.l1vpc-public-1.id,aws_subnet.l1vpc-public-2.id]
     #vpc_zone_identifier       = ["subnet-0aaaa3f6dadcf369e"]                    #(Optional) - The VPC zone identifier  "subnet-033bbd9e872782bc2",
     launch_configuration      = aws_launch_configuration.l1-launch-config.name  #(Optional) Name of the launch configuration to use
-    min_size                  = 1                                               #(Required) Minimum size of the Auto Scaling Group
+    min_size                  = var.l1-group-autoscaling_min_size               #(Required) Minimum size of the Auto Scaling Group
     max_size                  = 4                                               #(Required) Maximum size of the Auto Scaling Group.
     health_check_grace_period = 40                                              #Time (in seconds) after instance comes into service before checking health.
     health_check_type         = "EC2"                                           #(Optional) "EC2" or "ELB". Controls how health checking is done
@@ -50,7 +50,7 @@ resource "aws_autoscaling_policy" "l1-cpu-policy" {
 
 #define cloud watch monitoring
 resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm" {
-    alarm_name          = "l1-cpu-alarm"
+    alarm_name          = var.l1-cpu-alarm_name
     alarm_description   = "alarm once cpu usage increases"
     comparison_operator = "GreaterThanOrEqualToThreshold"   #(Required) The arithmetic operation to use when comparing the specified Statistic and Threshold
     evaluation_periods  = "2"                               #(Required) The number of periods over which data is compared to the specified threshold
@@ -69,7 +69,7 @@ resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm" {
 
 #define descaling policy
 resource "aws_autoscaling_policy" "l1-cpu-policy-scaledown" {
-    name                   = "l1-cpu-policy-scaledown"
+    name                   = var.l1-cpu-policy-scaledown_name
     scaling_adjustment     = -1                 #(Optional) Number of instances by which to scale
     autoscaling_group_name = aws_autoscaling_group.l1-group-autoscaling.name
     adjustment_type        = "ChangeInCapacity"
@@ -79,7 +79,7 @@ resource "aws_autoscaling_policy" "l1-cpu-policy-scaledown" {
 
 #define descaling cloud watch
 resource "aws_cloudwatch_metric_alarm" "l1-cpu-alarm-scaledown" {
-    alarm_name          = "l1-cpu-alarm-scaledown"
+    alarm_name          = var.l1-cpu-alarm-scaledown_name
     alarm_description   = "alarm once cpu usage decreases"
     comparison_operator = "LessThanOrEqualToThreshold"      #(Required) The arithmetic operation to use when comparing the specified Statistic and Threshold
     evaluation_periods  = "2"                               #(Required) The number of periods over which data is compared to the specified threshold

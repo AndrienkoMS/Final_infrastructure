@@ -54,15 +54,47 @@ variable "build" {
 }
 #---- ----- end mysql database credentials ----- ----#
 #==== ===== deviding workspaces wariables ===== ====#
+# autoscaling.tf variables:
+variable "instance_type" { 
+    description = "instance type for ec2" 
+    default     =  "t2.medium" 
+}
+
+variable "l1-group-autoscaling_name" {
+  type = string
+  default = "l1-group-autoscaling"
+}
+
+variable "l1-group-autoscaling_min_size" {
+  type = number
+  default = 1
+}
+
+variable "l1-cpu-policy_cooldown" {
+  type = number
+  default = 60
+}
+
+variable "l1-cpu-alarm_name" {
+  type = string
+  default = "l1-cpu-alarm"
+}
+
+variable "l1-cpu-policy-scaledown_name" {
+  type = string
+  default = "l1-cpu-policy-scaledown"
+}
+
+variable "l1-cpu-alarm-scaledown_name" {
+  type = string
+  default = "l1-cpu-alarm-scaledown"
+}
 #main.tf variables:
 variable "db_identifier" {
   type = string
   default = "wordpressdb"
 }
-variable "instance_type" { 
-    description = "instance type for ec2" 
-    default     =  "t2.medium" 
-}
+
 variable "db_subnet_group" {
   type = string
   default = "wp_subnet_group"
