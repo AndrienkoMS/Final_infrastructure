@@ -75,6 +75,16 @@ variable "iam_instance_profile_name" {
   type = string
   default = "l1_infrastructure_ec2_profile"
 }
+
+variable "elb_name" {
+  type = string
+  default = "l1-elb"
+}
+
+variable "l1-elb-sg_name" {
+  type = string
+  default = "l1-elb-sg"
+}
 #==== ===== end deviding workspaces wariables ===== ====#
 
 #---- ----- docker credentials ----- ----#

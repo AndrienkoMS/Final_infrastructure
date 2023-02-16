@@ -1,6 +1,6 @@
 #AWS ELB config
 resource "aws_elb" "l1-elb" {
-    name               = "l1-elb"
+    name               = var.elb_name
     subnets = [aws_subnet.l1vpc-public-1.id,aws_subnet.l1vpc-public-2.id]
     security_groups = [aws_security_group.l1-elb-sg.id]
     internal = true
@@ -26,14 +26,15 @@ resource "aws_elb" "l1-elb" {
   connection_draining_timeout = 400
 
   tags = {
-    Name = "l1-elb"
+    Name = var.elb_name
+
   }
 }
 
 #security group for AWS ELB
 resource "aws_security_group" "l1-elb-sg" {
     vpc_id = aws_vpc.l1-vpc.id
-    name = "l1-elb-sg"
+    name = var.l1-elb-sg_name
     description = "security group for ELB"
 
     ingress {
@@ -51,7 +52,7 @@ resource "aws_security_group" "l1-elb-sg" {
     }
 
     tags = {
-        Name = "l1-elb-sg"
+        Name = var.l1-elb-sg_name
     }
 }
 
