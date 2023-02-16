@@ -7,7 +7,7 @@ resource "aws_launch_configuration" "l1-launch-config" {
     security_groups = [aws_security_group.l1-elb-sg.id] #,"sg-091f44f52218ff9a0"]
     #security_groups = [aws_security_group.l1-instance-sg.id]
     user_data = file("ec2_script.sh")
-    iam_instance_profile    = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}" 
+    #iam_instance_profile    = "${aws_iam_instance_profile.l1_infrastructure_ec2_profile.name}" 
     depends_on = [aws_db_instance.default,aws_internet_gateway.gw]
     
     lifecycle {
