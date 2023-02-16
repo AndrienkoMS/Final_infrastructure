@@ -54,6 +54,7 @@ variable "build" {
 }
 #---- ----- end mysql database credentials ----- ----#
 #==== ===== deviding workspaces wariables ===== ====#
+#main.tf variables:
 variable "db_identifier" {
   type = string
   default = "wordpressdb"
@@ -76,6 +77,7 @@ variable "iam_instance_profile_name" {
   default = "l1_infrastructure_ec2_profile"
 }
 
+#elb.tf variables:
 variable "elb_name" {
   type = string
   default = "l1-elb"
@@ -91,6 +93,26 @@ variable "l1-instance-sg_name" {
   default = "l1-instance-sg"
 }
 
+#vpc.tf variables:
+variable "l1-vpc_name" {
+  type = string
+  default = "l1-vpc"
+}
+
+variable "l1vpc-public-1_name" {
+  type = string
+  default = "l1vpc-public-1"
+}
+
+variable "l1vpc-public-2_name" {
+  type = string
+  default = "l1vpc-public-2"
+}
+
+variable "l1-rt_name" {
+  type = string
+  default = "l1-rt"
+}
 #==== ===== end deviding workspaces wariables ===== ====#
 
 #---- ----- docker credentials ----- ----#

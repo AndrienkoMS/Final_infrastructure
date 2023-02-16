@@ -16,7 +16,7 @@ resource "aws_subnet" "l1vpc-public-1" {
     map_public_ip_on_launch = true
     availability_zone = "us-west-1a"
     tags = {
-        Name ="l1vpc-public-1"
+        Name = var.l1vpc-public-1_name
     }
 }
 
@@ -26,7 +26,7 @@ resource "aws_subnet" "l1vpc-public-2" {
     map_public_ip_on_launch = true
     availability_zone = "us-west-1b"
     tags = {
-        Name ="l1vpc-public-2"
+        Name = var.l1vpc-public-2_name
     }
 }
 
@@ -39,7 +39,7 @@ resource "aws_route_table" "l1-rt" {
   }
 
   tags = {
-    Name = "l1-rt"
+    Name = var.l1-rt_name
   }
 }
 
