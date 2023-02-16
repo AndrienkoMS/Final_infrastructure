@@ -84,16 +84,16 @@ pipeline {
         stage ("Terraform init") {
             steps {
                 sh ("terraform init")
+                /*sh "sudo chown root:jenkins /run/docker.sock"*/
                 sh '''
                 case ${tfvars_file} in
                     dev.tfvars)
-
-                        sudo -s terraform workspace select dev
+                        terraform workspace select dev
                         ;;
                     *)
 
-                        sudo -s terraform workspace select prod
-                            ;;
+                        terraform workspace select prod
+                        ;;
                     esac
                 '''
             }
