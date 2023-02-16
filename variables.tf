@@ -70,6 +70,11 @@ variable "iam_role_policy_name" {
   type = string
   default = "l1_infrastructure_ec2_policy"
 }
+
+variable "iam_instance_profile_name" {
+  type = string
+  default = "l1_infrastructure_ec2_profile"
+}
 #==== ===== end deviding workspaces wariables ===== ====#
 
 #---- ----- docker credentials ----- ----#
