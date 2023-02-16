@@ -87,10 +87,10 @@ pipeline {
                 sh '''
                 case ${tfvars_file} in
                     dev.tfvars)
-                        terraform workspace select dev
+                        sudo terraform workspace select dev
                         ;;
                     *)
-                            terraform workspace select prod
+                        sudo terraform workspace select prod
                             ;;
                     esac
                 '''
