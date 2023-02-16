@@ -15,7 +15,7 @@ resource "aws_db_instance" "default" {
   identifier        = var.db_identifier
   engine            = "mysql"
   engine_version    = "8.0.28"
-  instance_class    = "db.t2.micro"
+  instance_class    = var.db_instance_class
   name              = var.dbname
   username          = var.dbuser
   password          = var.dbpassword
@@ -25,7 +25,7 @@ resource "aws_db_instance" "default" {
 }
 
 resource "aws_db_subnet_group" "db_sg" {
-  name       = "wp_subnet_group"
+  name       = var.db_subnet_group
   subnet_ids = [aws_subnet.l1vpc-public-1.id, aws_subnet.l1vpc-public-2.id]
 
   tags = {
