@@ -33,7 +33,7 @@ resource "aws_db_subnet_group" "db_sg" {
   }
 }
 
-
+/*
 #IAM role to attach to ec2 to connect to DB
 resource "aws_iam_role_policy" "l1_infrastructure_ec2_policy" {
   name = var.iam_role_policy_name
@@ -54,7 +54,7 @@ resource "aws_iam_instance_profile" "l1_infrastructure_ec2_profile" {
   name = var.iam_instance_profile_name
   role = "${aws_iam_role.l1_infrastructure_ec2_policy.name}"
 }
-
+*/
 /*
 #Create securit group with firewall rules to have internet trafic on docker container
 resource "aws_security_group" "l1-final-wordpress-sg" {
