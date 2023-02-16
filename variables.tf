@@ -8,10 +8,11 @@ variable "key_name" {
     default     =  "l1_infrastructure_key" 
 }
 
-variable "instance_type" { 
-    description = "instance type for ec2" 
+variable "db_instance_class" { 
+    description = "instance class for database instance" 
     default     =  "t2.medium" 
 }
+
 
 variable "ami_id" { 
     description = "AMI for Ubuntu Ec2 instance - Ubuntu server 22.04 LTS (HVM), 64 bit" 
@@ -52,8 +53,23 @@ variable "build" {
     default = "default-build"
 }
 #---- ----- end mysql database credentials ----- ----#
+#==== ===== deviding workspaces wariables ===== ====#
 variable "db_identifier" {
   type = string
   default = "wordpressdb"
 }
+variable "instance_type" { 
+    description = "instance type for ec2" 
+    default     =  "t2.medium" 
+}
+variable "db_subnet_group" {
+  type = string
+  default = "wp_subnet_group"
+}
+variable "iam_role_policy_name" {
+  type = string
+  default = "l1_infrastructure_ec2_policy"
+}
+#==== ===== end deviding workspaces wariables ===== ====#
+
 #---- ----- docker credentials ----- ----#
