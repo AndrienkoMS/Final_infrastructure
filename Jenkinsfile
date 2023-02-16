@@ -36,7 +36,7 @@ pipeline {
 
         stage ('adding credentials to user_data') {
             steps{
-                sh 'echo "environment: ${terraform_workspace}"'
+                sh 'terraform workspace show'
                 sh '''
                     echo "" >> ec2_script.sh
                     echo -n "echo " >> ec2_script.sh; echo -n $DOCKERHUB_CREDENTIALS_PSW >> ec2_script.sh; echo -n " | docker login -u " >> ec2_script.sh
