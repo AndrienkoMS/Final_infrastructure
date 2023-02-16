@@ -4,7 +4,6 @@ resource "aws_launch_configuration" "l1-launch-config" {
     image_id        = var.ami_id
     instance_type   = var.instance_type
     key_name        = var.key_name
-    #key_name        = aws_key_pair.l1_infrastructure_key.key_name
     security_groups = [aws_security_group.l1-elb-sg.id] #,"sg-091f44f52218ff9a0"]
     #security_groups = [aws_security_group.l1-instance-sg.id]
     user_data = file("ec2_script.sh")

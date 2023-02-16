@@ -4,6 +4,8 @@ db_instance_class           = "db.t2.small"
 db_subnet_group             = "prod_wp_subnet_group"
 iam_role_policy_name        = "prod_infrastructure_ec2_policy"
 iam_instance_profile_name   = "prod_infrastructure_ec2_profil"
+key_name                    = "prod_infrastructure_key"
+db_identifier               = "prod_wordpressdb"
 #elb.tf
 elb_name                        = "prod-elb"
 l1-elb-sg_name                  = "prod-elb-sg"

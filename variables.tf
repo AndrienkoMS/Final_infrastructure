@@ -3,11 +3,6 @@ variable "aws_region" {
        default     = "us-west-1" 
 }
 
-variable "key_name" { 
-    description = " SSH keys to connect to ec2 instance" 
-    default     =  "l1_infrastructure_key" 
-}
-
 variable "db_instance_class" { 
     description = "instance class for database instance" 
     default     =  "t2.medium" 
@@ -109,6 +104,10 @@ variable "iam_instance_profile_name" {
   default = "l1_infrastructure_ec2_profile"
 }
 
+variable "key_name" { 
+    description = " SSH keys to connect to ec2 instance" 
+    default     =  "l1_infrastructure_key" 
+}
 #elb.tf variables:
 variable "elb_name" {
   type = string
