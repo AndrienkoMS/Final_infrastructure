@@ -45,7 +45,7 @@ pipeline {
                     echo "docker pull andrienkoms/final:latest" >> ec2_script.sh
 
                     case ${terraform_workspace} in
-                        dev)
+                        dev.tfvars)
                             echo -n "docker run -e WORDPRESS_DB_HOST=" >> ec2_script.sh; echo -n $DB_HOST >> ec2_script.sh; echo -n " -e WORDPRESS_DB_USER=" >> ec2_script.sh
                             echo -n $DB_USER >> ec2_script.sh; echo -n " -e WORDPRESS_DB_PASSWORD=" >> ec2_script.sh; echo -n $DB_PASSWORD >> ec2_script.sh
                             echo -n " -e WORDPRESS_DB_NAME=" >> ec2_script.sh; echo -n $DB_NAME >> ec2_script.sh
