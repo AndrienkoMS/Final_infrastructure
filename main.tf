@@ -1,12 +1,12 @@
 provider "aws" {
   region = var.aws_region
 }
-
+/*
 locals {
   wsp = terraform.workspace
   # ${local.wsp}  - doesn't work
 }
-
+*/
 #Create RDS MySQL database to store wordpress data
 resource "aws_db_instance" "default" {
   vpc_security_group_ids = [aws_security_group.l1-elb-sg.id]
