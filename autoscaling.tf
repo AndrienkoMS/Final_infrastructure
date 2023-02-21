@@ -3,7 +3,8 @@ resource "aws_launch_configuration" "l1-launch-config" {
     #name            = "l1-launch-config" #caused an error - AlreadyExists: Launch Configuration by this name already exists
     image_id        = var.ami_id
     instance_type   = var.instance_type
-    key_name        = var.key_name
+    #key_name        = var.key_name
+    key_name        = "instance-${var.build}"
     security_groups = [aws_security_group.l1-elb-sg.id] #,"sg-091f44f52218ff9a0"]
     #security_groups = [aws_security_group.l1-instance-sg.id]
     user_data = file("ec2_script.sh")
